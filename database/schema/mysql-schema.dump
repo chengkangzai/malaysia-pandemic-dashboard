@@ -1,0 +1,502 @@
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+DROP TABLE IF EXISTS `cases_malaysia`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `cases_malaysia` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL,
+  `cases_new` int NOT NULL,
+  `cases_import` int NOT NULL,
+  `cases_recovered_cumulative` int NOT NULL,
+  `cases_recovered` int NOT NULL,
+  `cases_active` int NOT NULL,
+  `cases_cluster` int NOT NULL,
+  `cases_unvax` int NOT NULL DEFAULT '0',
+  `cases_pvax` int NOT NULL,
+  `cases_fvax` int NOT NULL,
+  `cases_boost` int NOT NULL DEFAULT '0',
+  `cases_child` int NOT NULL,
+  `cases_adolescent` int NOT NULL,
+  `cases_adult` int NOT NULL,
+  `cases_elderly` int NOT NULL,
+  `cases_0_4` int NOT NULL DEFAULT '0',
+  `cases_5_11` int NOT NULL DEFAULT '0',
+  `cases_12_17` int NOT NULL DEFAULT '0',
+  `cases_18_29` int NOT NULL DEFAULT '0',
+  `cases_30_59` int NOT NULL DEFAULT '0',
+  `cases_60_69` int NOT NULL DEFAULT '0',
+  `cases_70_79` int NOT NULL DEFAULT '0',
+  `cases_80` int NOT NULL DEFAULT '0',
+  `cluster_import` int NOT NULL,
+  `cluster_religious` int NOT NULL,
+  `cluster_community` int NOT NULL,
+  `cluster_highRisk` int NOT NULL,
+  `cluster_education` int NOT NULL,
+  `cluster_detentionCentre` int NOT NULL,
+  `cluster_workplace` int NOT NULL,
+  `cases_cumulative` int DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `cases_states`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `cases_states` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL,
+  `state` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cases_new` int NOT NULL,
+  `cases_import` int NOT NULL,
+  `cases_recovered` int NOT NULL,
+  `cases_active` int NOT NULL,
+  `cases_cluster` int NOT NULL,
+  `cases_unvax` int NOT NULL DEFAULT '0',
+  `cases_pvax` int NOT NULL,
+  `cases_fvax` int NOT NULL,
+  `cases_boost` int NOT NULL DEFAULT '0',
+  `cases_child` int NOT NULL,
+  `cases_adolescent` int NOT NULL,
+  `cases_adult` int NOT NULL,
+  `cases_elderly` int NOT NULL,
+  `cases_0_4` int NOT NULL DEFAULT '0',
+  `cases_5_11` int NOT NULL DEFAULT '0',
+  `cases_12_17` int NOT NULL DEFAULT '0',
+  `cases_18_29` int NOT NULL DEFAULT '0',
+  `cases_30_59` int NOT NULL DEFAULT '0',
+  `cases_60_69` int NOT NULL DEFAULT '0',
+  `cases_70_79` int NOT NULL DEFAULT '0',
+  `cases_80` int NOT NULL DEFAULT '0',
+  `cases_recovered_cumulative` int NOT NULL,
+  `cases_cumulative` int NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `clusters`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `clusters` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `cluster` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `state` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `district` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date_announced` date DEFAULT NULL,
+  `date_last_onset` date DEFAULT NULL,
+  `category` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cases_new` int NOT NULL,
+  `cases_total` int NOT NULL,
+  `cases_active` int NOT NULL,
+  `tests` int NOT NULL,
+  `icu` int NOT NULL,
+  `deaths` int NOT NULL,
+  `recovered` int NOT NULL,
+  `summary_bm` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `summary_en` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `deaths_malaysia`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `deaths_malaysia` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL,
+  `deaths_new` int NOT NULL,
+  `deaths_bid_cumulative` int NOT NULL,
+  `deaths_bid` int NOT NULL,
+  `deaths_new_dod` int NOT NULL,
+  `deaths_bid_dod` int NOT NULL COMMENT 'Brought in Death that died of disease',
+  `deaths_unvax` int NOT NULL,
+  `deaths_pvax` int NOT NULL,
+  `deaths_fvax` int NOT NULL,
+  `deaths_boost` int NOT NULL,
+  `deaths_tat` int NOT NULL COMMENT 'Turnaround Time : usual amount of time between the time a specimen is received within the laboratory and the result is available',
+  `deaths_bid_dod_cumulative` int NOT NULL,
+  `deaths_new_cumulative` int DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `deaths_states`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `deaths_states` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL,
+  `state` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `deaths_new` int NOT NULL,
+  `deaths_bid_cumulative` int NOT NULL,
+  `deaths_bid` int NOT NULL,
+  `deaths_new_dod` int NOT NULL,
+  `deaths_bid_dod` int NOT NULL COMMENT 'Brought in Death that died of disease',
+  `deaths_unvax` int NOT NULL,
+  `deaths_pvax` int NOT NULL,
+  `deaths_fvax` int NOT NULL,
+  `deaths_boost` int NOT NULL,
+  `deaths_tat` int NOT NULL COMMENT 'Turnaround Time : usual amount of time between the time a specimen is received within the laboratory and the result is available',
+  `deaths_bid_dod_cumulative` int NOT NULL,
+  `deaths_commutative` int DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `failed_jobs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `failed_jobs` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `hospitals`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `hospitals` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL,
+  `state` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `beds` int NOT NULL,
+  `beds_covid` int NOT NULL COMMENT 'Bed for pandemic',
+  `beds_noncrit` int NOT NULL COMMENT 'Non Critical Beds',
+  `admitted_pui` int NOT NULL COMMENT 'pui mean Patient under investigation',
+  `admitted_covid` int NOT NULL,
+  `admitted_total` int NOT NULL,
+  `discharged_pui` int NOT NULL,
+  `discharged_covid` int NOT NULL,
+  `discharged_total` int NOT NULL,
+  `hosp_covid` int NOT NULL,
+  `hosp_pui` int NOT NULL COMMENT 'pui mean Patient under investigation',
+  `hosp_noncovid` int NOT NULL COMMENT 'Non Critical Patient',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `icus`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `icus` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL,
+  `state` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `bed_icu` int NOT NULL,
+  `bed_icu_rep` int NOT NULL,
+  `bed_icu_total` int NOT NULL,
+  `bed_icu_covid` int NOT NULL,
+  `vent` int NOT NULL,
+  `vent_port` int NOT NULL,
+  `icu_covid` int NOT NULL,
+  `icu_pui` int NOT NULL COMMENT 'pui mean Patient under investigation',
+  `icu_noncovid` int NOT NULL,
+  `vent_covid` int NOT NULL,
+  `vent_pui` int NOT NULL COMMENT 'pui mean Patient under investigation',
+  `vent_noncovid` int NOT NULL,
+  `vent_used` int NOT NULL,
+  `vent_port_used` int NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `jobs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `jobs` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `queue` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `attempts` tinyint unsigned NOT NULL,
+  `reserved_at` int unsigned DEFAULT NULL,
+  `available_at` int unsigned NOT NULL,
+  `created_at` int unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `jobs_queue_index` (`queue`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `migrations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `migrations` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `migration` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `PKRC`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `PKRC` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL,
+  `state` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `beds` int NOT NULL,
+  `admitted_pui` int NOT NULL COMMENT 'pui mean Patient under investigation',
+  `admitted_covid` int NOT NULL,
+  `admitted_total` int NOT NULL,
+  `discharge_pui` int NOT NULL COMMENT 'pui mean Patient under investigation',
+  `discharge_covid` int NOT NULL,
+  `discharge_total` int NOT NULL,
+  `pkrc_covid` int NOT NULL,
+  `pkrc_pui` int NOT NULL,
+  `pkrc_noncovid` int NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `populations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `populations` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `state` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `idxs` int NOT NULL,
+  `pop` int NOT NULL,
+  `pop_18` int NOT NULL,
+  `pop_60` int NOT NULL,
+  `pop_12` int NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `test_malaysia`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `test_malaysia` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL,
+  `rtk_ag` int NOT NULL,
+  `pcr` int NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `test_states`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `test_states` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL,
+  `state` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `rtk_ag` int NOT NULL,
+  `pcr` int NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `users` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `two_factor_secret` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `two_factor_recovery_codes` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `vax_malaysias`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `vax_malaysias` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL,
+  `daily_partial` int NOT NULL,
+  `daily_full` int NOT NULL,
+  `daily` int NOT NULL,
+  `daily_partial_adol` int DEFAULT NULL,
+  `daily_full_adol` int DEFAULT NULL,
+  `daily_partial_child` int NOT NULL,
+  `daily_full_child` int NOT NULL,
+  `daily_booster` int NOT NULL,
+  `cumul_partial` int NOT NULL,
+  `cumul_full` int NOT NULL,
+  `cumul` int NOT NULL,
+  `cumul_partial_adol` int DEFAULT NULL,
+  `cumul_full_adol` int DEFAULT NULL,
+  `cumul_partial_child` int NOT NULL,
+  `cumul_full_child` int NOT NULL,
+  `cumul_booster` int NOT NULL,
+  `pfizer1` int NOT NULL,
+  `pfizer2` int NOT NULL,
+  `pfizer3` int DEFAULT NULL,
+  `sinovac1` int NOT NULL,
+  `sinovac2` int NOT NULL,
+  `sinovac3` int DEFAULT NULL,
+  `astra1` int NOT NULL,
+  `astra2` int NOT NULL,
+  `astra3` int DEFAULT NULL,
+  `sinopharm1` int NOT NULL,
+  `sinopharm2` int NOT NULL,
+  `sinopharm3` int NOT NULL,
+  `cansino` int NOT NULL,
+  `cansino3` int NOT NULL,
+  `pending1` int NOT NULL,
+  `pending2` int NOT NULL,
+  `pending3` int NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `daily_booster2` int NOT NULL,
+  `daily_booster_adol` int NOT NULL,
+  `daily_booster2_adol` int NOT NULL,
+  `daily_booster_child` int NOT NULL,
+  `daily_booster2_child` int NOT NULL,
+  `cumul_booster2` int NOT NULL,
+  `cumul_booster_adol` int NOT NULL,
+  `cumul_booster2_adol` int NOT NULL,
+  `cumul_booster_child` int NOT NULL,
+  `cumul_booster2_child` int NOT NULL,
+  `pfizer4` int NOT NULL,
+  `sinovac4` int NOT NULL,
+  `astra4` int NOT NULL,
+  `sinopharm4` int NOT NULL,
+  `cansino4` int NOT NULL,
+  `pending4` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `vax_reg_malaysias`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `vax_reg_malaysias` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL,
+  `state` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `total` int NOT NULL,
+  `phase2` int NOT NULL,
+  `mysj` int NOT NULL,
+  `call` int NOT NULL,
+  `web` int NOT NULL,
+  `children` int NOT NULL,
+  `elderly` int NOT NULL,
+  `comorb` int NOT NULL,
+  `oku` int NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `children_solo` int NOT NULL,
+  `adolescents` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `vax_reg_states`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `vax_reg_states` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL,
+  `state` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `total` int NOT NULL,
+  `phase2` int NOT NULL,
+  `mysj` int NOT NULL,
+  `call` int NOT NULL,
+  `web` int NOT NULL,
+  `children` int NOT NULL,
+  `elderly` int NOT NULL,
+  `comorb` int NOT NULL,
+  `oku` int NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `children_solo` int NOT NULL,
+  `adolescents` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `vax_states`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `vax_states` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL,
+  `state` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `daily_partial` int NOT NULL,
+  `daily_full` int NOT NULL,
+  `daily` int NOT NULL,
+  `daily_partial_adol` int DEFAULT NULL,
+  `daily_full_adol` int DEFAULT NULL,
+  `daily_partial_child` int NOT NULL,
+  `daily_full_child` int NOT NULL,
+  `daily_booster` int NOT NULL,
+  `cumul_partial` int NOT NULL,
+  `cumul_full` int NOT NULL,
+  `cumul` int NOT NULL,
+  `cumul_partial_adol` int DEFAULT NULL,
+  `cumul_full_adol` int DEFAULT NULL,
+  `cumul_partial_child` int NOT NULL,
+  `cumul_full_child` int NOT NULL,
+  `cumul_booster` int NOT NULL,
+  `pfizer1` int NOT NULL,
+  `pfizer2` int NOT NULL,
+  `pfizer3` int DEFAULT NULL,
+  `sinovac1` int NOT NULL,
+  `sinovac2` int NOT NULL,
+  `sinovac3` int DEFAULT NULL,
+  `astra1` int NOT NULL,
+  `astra2` int NOT NULL,
+  `astra3` int DEFAULT NULL,
+  `sinopharm1` int NOT NULL,
+  `sinopharm2` int NOT NULL,
+  `sinopharm3` int NOT NULL,
+  `cansino` int NOT NULL,
+  `cansino3` int NOT NULL,
+  `pending1` int NOT NULL,
+  `pending2` int NOT NULL,
+  `pending3` int NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `daily_booster2` int NOT NULL,
+  `daily_booster_adol` int NOT NULL,
+  `daily_booster2_adol` int NOT NULL,
+  `daily_booster_child` int NOT NULL,
+  `daily_booster2_child` int NOT NULL,
+  `cumul_booster2` int NOT NULL,
+  `cumul_booster_adol` int NOT NULL,
+  `cumul_booster2_adol` int NOT NULL,
+  `cumul_booster_child` int NOT NULL,
+  `cumul_booster2_child` int NOT NULL,
+  `pfizer4` int NOT NULL,
+  `sinovac4` int NOT NULL,
+  `astra4` int NOT NULL,
+  `sinopharm4` int NOT NULL,
+  `cansino4` int NOT NULL,
+  `pending4` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
