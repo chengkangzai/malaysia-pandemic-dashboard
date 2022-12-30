@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\PandemicVaccination;
 
 use App\Models\VaxRegState;
-use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -13,13 +12,6 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class Vaccination extends Component
 {
-    public bool $prologEnabled;
-
-    public function mount()
-    {
-        $this->prologEnabled = Carbon::createFromDate(2000, 3, 27)->isPast();
-    }
-
     public function render(): Factory|View|Application
     {
         return view('livewire.pandemic-vaccination.vaccination');
