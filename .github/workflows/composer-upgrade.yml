@@ -1,0 +1,31 @@
+name: Composer Upgrade
+on:
+  schedule:
+    - cron: '0 0 1 * *' # Runs on the first day of every month at midnight UTC
+jobs:
+  composer-upgrade:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+
+      - name: Install dependencies
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Upgrade dependencies
+        run: composer update --no-interaction --prefer-dist
+        env:
+          COMPOSER_ALLOW_SUPERUSER: 1
+
+      - name: Bump Composer version
+        run: composer bump
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Upgrade composer dependencies
