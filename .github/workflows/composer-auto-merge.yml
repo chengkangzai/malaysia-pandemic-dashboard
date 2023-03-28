@@ -1,0 +1,22 @@
+name: Auto-Merge PR with [deps_upgrade] Prefix
+
+on:
+  pull_request_target:
+    types: [opened, reopened, synchronize]
+    branches: [main]
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Auto-Merge PR
+        if: startsWith(github.event.pull_request.title, '[deps_upgrade]') && github.event.pull_request.head.repo.owner.login == 'github-actions'
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "<>"
+          git fetch origin ${{ github.event.pull_request.base.ref }}:$GITHUB_REF
+          git merge --no-ff --no-edit ${{ github.event.pull_request.head.sha }}
+          git push origin $GITHUB_REF
