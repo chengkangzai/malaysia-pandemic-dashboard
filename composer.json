@@ -8,7 +8,7 @@
         "php": "^8.0.2",
         "artesaos/seotools": "^1.2",
         "barryvdh/laravel-translation-manager": "^0.6.5",
-        "guzzlehttp/guzzle": "^7.7.0",
+        "guzzlehttp/guzzle": "^7.7",
         "hammerstone/sidecar": "^0.3.12",
         "laravel-notification-channels/webhook": "^2.4",
         "laravel/framework": "^9.52.10",
