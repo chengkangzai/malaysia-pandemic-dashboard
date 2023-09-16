@@ -34,10 +34,19 @@ class CasesMalaysiaResource extends Resource
                 TextEntry::make('cases_recovered')->numeric(),
                 TextEntry::make('cases_active')->numeric(),
                 TextEntry::make('cases_cluster')->numeric(),
-                TextEntry::make('cases_unvax')->numeric(),
-                TextEntry::make('cases_pvax')->numeric(),
-                TextEntry::make('cases_fvax')->numeric(),
-                TextEntry::make('cases_boost')->numeric(),
+
+                Section::make('Vaccination Status')
+                    ->compact()
+                    ->collapsible()
+                    ->collapsed()
+                    ->columns(3)
+                    ->schema([
+                        TextEntry::make('cases_unvax')->numeric(),
+                        TextEntry::make('cases_pvax')->numeric(),
+                        TextEntry::make('cases_fvax')->numeric(),
+                        TextEntry::make('cases_boost')->numeric(),
+                    ]),
+
                 Section::make('Age Group')
                     ->compact()
                     ->collapsible()
@@ -80,7 +89,6 @@ class CasesMalaysiaResource extends Resource
                         TextEntry::make('cluster_education')->numeric(),
                         TextEntry::make('cluster_detentionCentre')->numeric(),
                         TextEntry::make('cluster_workplace')->numeric(),
-
                     ]),
             ]);
     }
@@ -212,17 +220,6 @@ class CasesMalaysiaResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->numeric()
                     ->sortable(),
-
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->numeric()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->numeric()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 Filter::make('date')
