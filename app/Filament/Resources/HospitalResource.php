@@ -3,13 +3,18 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\HospitalResource\Pages;
+use App\Models\DeathsState;
 use App\Models\Hospital;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Select;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class HospitalResource extends Resource
 {
@@ -168,8 +173,38 @@ class HospitalResource extends Resource
                     ->sortable(),
             ])
             ->filters([
-                //
-            ])
+                Filter::make('date')
+                    ->form([
+                        DatePicker::make('created_from'),
+                        DatePicker::make('created_until'),
+                    ])
+                    ->query(fn(Builder $query, array $data): Builder => $query
+                        ->when($data['created_from'],
+                            fn(Builder $query, $date): Builder => $query->whereDate('date', '>=', $date),
+                        )
+                        ->when($data['created_until'],
+                            fn(Builder $query, $date): Builder => $query->whereDate('date', '<=', $date),
+                        )),
+
+                Tables\Filters\SelectFilter::make('state')
+                    ->options(DeathsState::STATE)
+                    ->searchable()
+                    ->attribute('state'),
+
+                Tables\Filters\SelectFilter::make('date_range')
+                    ->form([
+                        Select::make('range')
+                            ->options([
+                                7 => '7 Days',
+                                14 => '14 Days',
+                                30 => '1 Month',
+                            ]),
+                    ])
+                    ->query(fn(Builder $query, array $data): Builder => $query
+                        ->when($data['range'],
+                            fn(Builder $query, $range): Builder => $query->whereDate('date', '>=', now()->subDays($range)),
+                        )),
+            ], Tables\Enums\FiltersLayout::AboveContentCollapsible)
             ->actions([
                 Tables\Actions\ViewAction::make(),
             ])
