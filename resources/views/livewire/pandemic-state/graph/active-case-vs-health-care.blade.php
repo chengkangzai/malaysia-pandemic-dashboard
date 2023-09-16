@@ -1,5 +1,5 @@
 <div>
-    <h2 class="text-2xl pb-2">{{ __('Active Case vs Health Care') }}</h2>
+    <h2 class="pb-2 text-2xl">{{ __('Active Case vs Health Care') }}</h2>
     <hr class="py-2">
     <canvas id="active-case-vs-health-care"></canvas>
 </div>

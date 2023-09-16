@@ -1,5 +1,5 @@
 <div>
-    <h2 class="text-2xl pb-2">{{ __('Deaths') }}</h2>
+    <h2 class="pb-2 text-2xl">{{ __('Deaths') }}</h2>
     <hr class="py-2">
     <canvas id="death-case-per-day"></canvas>
 </div>
