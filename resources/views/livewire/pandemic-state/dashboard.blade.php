@@ -1,4 +1,4 @@
-<section class="mt-2" wire:loading.class="animate-pulse" wire:init="load" xmlns:wire="">
+<section class="mt-2" wire:loading.class="animate-pulse">
     <div class="space-y-2 sm:grid sm:grid-cols-3 sm:grid-rows-3 sm:gap-2 sm:space-y-0">
         <div class="rounded-xl bg-gray-50 p-4 shadow dark:bg-white sm:py-8">
             <h2 class="text-2xl">{{ trans('pandemic.New_Case', ['day' => $cases->date_diffWord]) }}</h2>

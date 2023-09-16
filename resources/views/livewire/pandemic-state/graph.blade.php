@@ -1,4 +1,4 @@
-<div xmlns:wire="http://www.w3.org/1999/xhtml" wire:loading.class="animate-pulse" wire:init="load">
+<div xmlns:wire="http://www.w3.org/1999/xhtml" wire:loading.class="animate-pulse">
     <div class="mb-2">
         <section class="my-2 rounded-2xl bg-gray-50 py-8 shadow dark:bg-white dark:text-black" id="graph-state">
             <a href="#graph-state">
@@ -20,19 +20,19 @@
                     </label>
                 </div>
 
-                <div>
-                    <label>
-                        {{ __('Filter By') }} :
-                        <select class="mx-2 rounded bg-white px-4 py-1 ring ring-gray-200" wire:model.live="filter">
-                            <option disabled>-----</option>
-                            @foreach (\App\Http\Services\Covid\Graph\CovidStateGraphService::FILTER as $filter)
-                                <option value="{{ $filter }}">
-                                    {{ __($filter) }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </label>
-                </div>
+                {{--                <div> --}}
+                {{--                    <label> --}}
+                {{--                        {{ __('Filter By') }} : --}}
+                {{--                        <select class="mx-2 rounded bg-white px-4 py-1 ring ring-gray-200" wire:model.live="filter"> --}}
+                {{--                            <option disabled>-----</option> --}}
+                {{--                            @foreach (\App\Http\Services\Covid\Graph\CovidStateGraphService::FILTER as $filter) --}}
+                {{--                                <option value="{{ $filter }}"> --}}
+                {{--                                    {{ __($filter) }} --}}
+                {{--                                </option> --}}
+                {{--                            @endforeach --}}
+                {{--                        </select> --}}
+                {{--                    </label> --}}
+                {{--                </div> --}}
             </div>
 
         </section>

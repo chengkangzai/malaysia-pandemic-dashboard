@@ -43,24 +43,24 @@ class Dashboard extends Component
 
     protected $listeners = ['CovidStateUpdate', 'vaxPopulationUpdate'];
 
-    public function render(CasesStateService $casesStateService, VaxStateService $vaxStateService): Factory|View|Application
+    public function render(CasesStateService $casesStateService, VaxStateService $vaxStateService): View
     {
-            $this->initVariable($casesStateService, $vaxStateService);
+        $this->initVariable($casesStateService, $vaxStateService);
 
         return view('livewire.pandemic-state.dashboard');
     }
 
-    public function placeholder()
+    public function placeholder():View
     {
-
+        return view('livewire.pandemic-state.dashboard-placeholder');
     }
 
-    public function CovidStateUpdate(string $state)
+    public function CovidStateUpdate(string $state): void
     {
         $this->state = $state;
     }
 
-    public function vaxPopulationUpdate(string $popFilter)
+    public function vaxPopulationUpdate(string $popFilter): void
     {
         $this->popFilter = $popFilter;
     }

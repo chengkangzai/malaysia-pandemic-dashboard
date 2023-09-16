@@ -20,17 +20,17 @@ class Head extends Component
         return view('livewire.pandemic-state.head');
     }
 
-    public function updatedState()
+    public function updatedState(): void
     {
         $this->dispatch('CovidStateUpdate', $this->state);
     }
 
-    public function CovidStateUpdate(string $state)
+    public function CovidStateUpdate(string $state): void
     {
         $this->state = $state;
     }
 
-    public function updatedPopFilter()
+    public function updatedPopFilter(): void
     {
         $this->dispatch('vaxPopulationUpdate', $this->popFilter);
     }

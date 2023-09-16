@@ -23,35 +23,24 @@ class HealthCare extends Component
 
     protected $listeners = ['CovidStateUpdate'];
 
-    public bool $readyToLoad = false;
-
-    public function mount()
+    public function render(HealthCareService $service): View
     {
-        $this->ICU = new ICU();
-        $this->hospital = new Hospital();
-        $this->PKRC = new PKRC();
-    }
-
-    public function render(HealthCareService $service): Factory|View|Application
-    {
-        if ($this->readyToLoad) {
-            $this->initVariable($service);
-        }
+        $this->initVariable($service);
 
         return view('livewire.pandemic-state.health-care');
     }
 
-    public function load()
+    public function placeholder():View
     {
-        $this->readyToLoad = true;
+        return view('livewire.pandemic-state.health-care-placeholder');
     }
 
-    public function CovidStateUpdate(string $state)
+    public function CovidStateUpdate(string $state): void
     {
         $this->state = $state;
     }
 
-    public function updatedState()
+    public function updatedState(): void
     {
         $this->dispatch('CovidStateUpdate', $this->state);
     }

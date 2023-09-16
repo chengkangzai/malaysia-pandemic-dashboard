@@ -1,5 +1,4 @@
-<section class="mt-2 mb-2" id="health-care" xmlns:wire="http://www.w3.org/1999/xhtml" wire:init="load"
-    wire:loading.class="animate-pulse">
+<section class="mt-2 mb-2" id="health-care" xmlns:wire="http://www.w3.org/1999/xhtml" wire:loading.class="animate-pulse">
     <section class="my-2 rounded-2xl bg-gray-50 py-12 shadow dark:bg-white dark:text-black">
         <a href="#health-care">
             <h1 class="px-2 text-2xl font-bold sm:text-5xl">{{ __('Health Care of :') }} {{ __($state) }}</h1>
@@ -19,10 +18,8 @@
         </div>
     </section>
 
-    <div class="space-y-2 sm:grid sm:grid-cols-4 sm:grid-rows-3 sm:gap-2 sm:space-y-0">
-        <div
-            class="place-self-stretch self-center rounded-xl bg-gray-50 p-4 px-4 shadow dark:bg-white sm:row-span-2 sm:py-32">
-            {{-- TODO : Change the wording of "ICU,PKRC, Hospital to dynamically" --}}
+    <div class="place-content-stretch space-y-2 sm:grid sm:grid-cols-4 sm:grid-rows-3 sm:gap-2 sm:space-y-0">
+        <div class="rounded-xl bg-gray-50 p-4 px-4 shadow dark:bg-white sm:row-span-2 sm:py-32">
             <h2 class="pb-2 text-2xl">{{ __('Inflow and Out Flow of Hospital and ICU') }}</h2>
             <hr class="mx-4 sm:py-2">
             <p class="text-4xl font-bold sm:text-5xl">

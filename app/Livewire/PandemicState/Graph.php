@@ -46,55 +46,29 @@ class Graph extends Component
 
     public Collection $cumDeathCase;
 
-    private CovidStateGraphService $service;
-
-    public bool $readyToLoad = false;
-
-    public function mount()
+    public function render(): Factory|View|Application
     {
-        $this->date = collect();
-        $this->confirmCase = collect();
-        $this->recoveredCase = collect();
-        $this->deathCase = collect();
-        $this->dodCase = collect();
-        $this->activeCase = collect();
-        $this->bidCase = collect();
-        $this->cat1 = collect();
-        $this->cat2 = collect();
-        $this->cat3 = collect();
-        $this->cat4 = collect();
-        $this->cat5 = collect();
-        $this->cumRecoveredCase = collect();
-        $this->cumDeathCase = collect();
-    }
-
-    public function render(CovidStateGraphService $service): Factory|View|Application
-    {
-        $this->service = $service;
-        if ($this->readyToLoad) {
-            $this->initVariable();
-            $this->notifyChild();
-        }
+        $this->initVariable();
 
         return view('livewire.pandemic-state.graph');
     }
 
-    public function updatedState()
+    public function updating($property, $value): void
     {
-        $this->dispatch('CovidStateUpdate', $this->state);
+        if ($property === 'state') {
+            $this->state = $value;
+            $this->initVariable();
+            $this->notifyChild();
+        }
+
+        if ($property === 'filter') {
+            $this->filter = $value;
+            $this->initVariable();
+            $this->notifyChild();
+        }
     }
 
-    public function CovidStateUpdate(string $state)
-    {
-        $this->state = $state;
-    }
-
-    public function load()
-    {
-        $this->readyToLoad = true;
-    }
-
-    public function notifyChild()
+    public function notifyChild(): void
     {
         $this->dispatch('CovidStateUpdate',
             date: $this->date,
@@ -116,11 +90,12 @@ class Graph extends Component
 
     public function initVariable(): void
     {
-        $cases = $this->service->getCases($this->state, $this->filter);
-        $deaths = $this->service->getDeath($this->state, $this->filter);
-        $healthCareCategory = $this->service->getHealthCare($this->state, $this->filter);
+        $service = app(CovidStateGraphService::class);
+        $cases = $service->getCases($this->state, $this->filter);
+        $deaths = $service->getDeath($this->state, $this->filter);
+        $healthCareCategory = $service->getHealthCare($this->state, $this->filter);
 
-        $this->date = $cases->pluck('date')->map(fn ($date) => Carbon::parse($date)->toDateString());
+        $this->date = $cases->pluck('date')->map(fn($date) => Carbon::parse($date)->toDateString());
         $this->confirmCase = $cases->pluck('cases_new');
         $this->recoveredCase = $cases->pluck('cases_recovered');
         $this->cumRecoveredCase = $cases->pluck('cases_recovered_cumulative');
