@@ -5,12 +5,12 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
-        "php": "^8.0.2",
+        "php": "^8.2",
         "artesaos/seotools": "^1.2",
         "barryvdh/laravel-translation-manager": "^0.6.5",
         "guzzlehttp/guzzle": "^7.8",
-        "hammerstone/sidecar": "^0.3.12",
-        "laravel/framework": "^9.52.15",
+        "hammerstone/sidecar": "^0.4.0",
+        "laravel/framework": "^10.0",
         "laravel/tinker": "^2.8.2",
         "livewire/livewire": "^2.12.6",
         "silviolleite/laravelpwa": "^2.0.3",
@@ -24,10 +24,10 @@
         "laravel/pint": "^1.13.1",
         "laravel/sail": "^1.25.0",
         "mockery/mockery": "^1.6.6",
-        "nunomaduro/collision": "^6.4",
+        "nunomaduro/collision": "^7.0",
         "orangehill/iseed": "^3.0.3",
-        "phpunit/phpunit": "^9.6.12",
-        "spatie/laravel-ignition": "^1.6.4"
+        "phpunit/phpunit": "^10",
+        "spatie/laravel-ignition": "^2.0"
     },
     "autoload": {
         "psr-4": {
