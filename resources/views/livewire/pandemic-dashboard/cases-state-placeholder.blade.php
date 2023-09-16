@@ -4,37 +4,37 @@
             <div class="overflow-hidden rounded-lg border-b border-gray-200 shadow">
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">
-                    <tr>
-                        <th colspan="7" class="border-b py-2">
-                            <div class="mx-auto my-1 h-6 w-40 rounded-3xl bg-gray-500"></div>
-                            <div class="mx-auto my-1 h-4 w-32 rounded-3xl bg-gray-500 float-right"></div>
-                        </th>
-                    </tr>
-                    <tr>
-                        @foreach (range(1, 7) as $_)
-                            <th scope="col" class="py-4 text-center">
-                                <div class="mx-auto h-4 w-24 rounded-3xl bg-gray-500"></div>
-                            </th>
-                        @endforeach
-                    </tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-200 bg-white">
-                    @foreach (range(1, 12) as $_)
                         <tr>
-                            @foreach (range(1, 7) as $__)
-                                <td class="whitespace-nowrap px-6 py-4">
+                            <th colspan="7" class="border-b py-2">
+                                <div class="mx-auto my-1 h-6 w-40 rounded-3xl bg-gray-500"></div>
+                                <div class="float-right mx-auto my-1 h-4 w-32 rounded-3xl bg-gray-500"></div>
+                            </th>
+                        </tr>
+                        <tr>
+                            @foreach (range(1, 7) as $_)
+                                <th scope="col" class="py-4 text-center">
                                     <div class="mx-auto h-4 w-24 rounded-3xl bg-gray-500"></div>
-                                </td>
+                                </th>
                             @endforeach
                         </tr>
-                    @endforeach
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 bg-white">
+                        @foreach (range(1, 12) as $_)
+                            <tr>
+                                @foreach (range(1, 7) as $__)
+                                    <td class="whitespace-nowrap px-6 py-4">
+                                        <div class="mx-auto h-4 w-24 rounded-3xl bg-gray-500"></div>
+                                    </td>
+                                @endforeach
+                            </tr>
+                        @endforeach
                     </tbody>
                     <tfoot>
-                    <tr class="bg-white">
-                        <td class="whitespace-nowrap px-6 py-4 text-left" colspan="7">
-                            <div class="mx-auto my-1 h-4 w-64 rounded-3xl bg-gray-500"></div>
-                        </td>
-                    </tr>
+                        <tr class="bg-white">
+                            <td class="whitespace-nowrap px-6 py-4 text-left" colspan="7">
+                                <div class="mx-auto my-1 h-4 w-64 rounded-3xl bg-gray-500"></div>
+                            </td>
+                        </tr>
                     </tfoot>
                 </table>
             </div>
