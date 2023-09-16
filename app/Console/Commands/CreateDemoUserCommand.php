@@ -7,7 +7,7 @@ use Illuminate\Console\Command;
 
 class CreateDemoUserCommand extends Command
 {
-    protected $signature = 'create:demo-user {email=demo@chengkangzai.com} {password=password}';
+    protected $signature = 'create:demo-user {--email=demo@chengkangzai.com} {--password=password}';
 
     protected $description = 'This command will create a user';
 
