@@ -20,12 +20,8 @@ use App\Models\VaxMalaysia;
 use App\Models\VaxRegMalaysia;
 use App\Models\VaxRegState;
 use App\Models\VaxState;
-use App\Notifications\ImportTaskFailedNotification;
-use App\Notifications\ImportTaskSuccessNotification;
-use App\Notifications\Notifiable\SuperAdminNotifiable;
 use Exception;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Notification;
 
 class ImportPandemicDataCommand extends Command
 {
@@ -91,14 +87,10 @@ class ImportPandemicDataCommand extends Command
             $this->info("Import completed in {$runTime} seconds");
 
             if (App::isProduction() && $shouldUpdate) {
-                Notification::send(new SuperAdminNotifiable(), new ImportTaskSuccessNotification(self::class, $this->models, $runTime));
                 $this->call(UpdatePandemicBrowserScreenshot::class);
             }
         } catch (Exception $e) {
             $this->error($e->getMessage());
-            if (App::isProduction()) {
-                Notification::send(new SuperAdminNotifiable(), new ImportTaskFailedNotification($e->getMessage()));
-            }
 
             return self::INVALID;
         }
