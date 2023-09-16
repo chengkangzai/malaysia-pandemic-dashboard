@@ -98,65 +98,65 @@ class DeathsMalaysiaResource extends Resource
         return $table
             ->defaultSort('date', 'desc')
             ->columns([
-            Tables\Columns\TextColumn::make('date')
-                ->date()
-                ->sortable(),
-            Tables\Columns\TextColumn::make('deaths_new')
-                ->label('New Deaths')
-                ->tooltip('deaths due to COVID-19 based on date reported to public')
-                ->numeric()
-                ->sortable(),
-            Tables\Columns\TextColumn::make('deaths_new_cumulative')
-                ->label('Cumulative Deaths')
-                ->numeric()
-                ->sortable(),
-            Tables\Columns\TextColumn::make('deaths_bid')
-                ->label('Brought-in dead')
-                ->tooltip('deaths due to COVID-19 which were brought-in dead based on date reported to public')
-                ->numeric()
-                ->sortable(),
-            Tables\Columns\TextColumn::make('deaths_bid_cumulative')
-                ->label('Cumulative Brought-in dead')
-                ->numeric()
-                ->sortable(),
+                Tables\Columns\TextColumn::make('date')
+                    ->date()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('deaths_new')
+                    ->label('New Deaths')
+                    ->tooltip('deaths due to COVID-19 based on date reported to public')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('deaths_new_cumulative')
+                    ->label('Cumulative Deaths')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('deaths_bid')
+                    ->label('Brought-in dead')
+                    ->tooltip('deaths due to COVID-19 which were brought-in dead based on date reported to public')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('deaths_bid_cumulative')
+                    ->label('Cumulative Brought-in dead')
+                    ->numeric()
+                    ->sortable(),
 
-            Tables\Columns\TextColumn::make('deaths_tat')
-                ->label('Turnaround Time')
-                ->tooltip('median days between date of death and date of report for all deaths reported on the day')
-                ->numeric()
-                ->sortable(),
+                Tables\Columns\TextColumn::make('deaths_tat')
+                    ->label('Turnaround Time')
+                    ->tooltip('median days between date of death and date of report for all deaths reported on the day')
+                    ->numeric()
+                    ->sortable(),
 
-            Tables\Columns\TextColumn::make('deaths_new_dod')
-                ->tooltip('deaths due to COVID-19 based on date of death')
-                ->toggleable(isToggledHiddenByDefault: true)
-                ->numeric()
-                ->sortable(),
-            Tables\Columns\TextColumn::make('deaths_bid_dod')
-                ->tooltip('deaths due to COVID-19 which were brought-in dead based on date of death (perfect subset of deaths_new_dod)')
-                ->toggleable(isToggledHiddenByDefault: true)
-                ->numeric()
-                ->sortable(),
-            Tables\Columns\TextColumn::make('deaths_unvax')
-                ->tooltip('deaths of unvaccinated individuals who died due to COVID-19 based on date of death')
-                ->toggleable(isToggledHiddenByDefault: true)
-                ->numeric()
-                ->sortable(),
-            Tables\Columns\TextColumn::make('deaths_pvax')
-                ->tooltip('deaths of partially-vaccinated individuals who died due to COVID-19 based on date of death')
-                ->toggleable(isToggledHiddenByDefault: true)
-                ->numeric()
-                ->sortable(),
-            Tables\Columns\TextColumn::make('deaths_fvax')
-                ->tooltip('deaths of fully-vaccinated individuals who died due to COVID-19 based on date of death')
-                ->toggleable(isToggledHiddenByDefault: true)
-                ->numeric()
-                ->sortable(),
-            Tables\Columns\TextColumn::make('deaths_boost')
-                ->tooltip('deaths of individuals who received a booster dose and died due to COVID-19 based on date of death')
-                ->toggleable(isToggledHiddenByDefault: true)
-                ->numeric()
-                ->sortable(),
-        ])
+                Tables\Columns\TextColumn::make('deaths_new_dod')
+                    ->tooltip('deaths due to COVID-19 based on date of death')
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('deaths_bid_dod')
+                    ->tooltip('deaths due to COVID-19 which were brought-in dead based on date of death (perfect subset of deaths_new_dod)')
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('deaths_unvax')
+                    ->tooltip('deaths of unvaccinated individuals who died due to COVID-19 based on date of death')
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('deaths_pvax')
+                    ->tooltip('deaths of partially-vaccinated individuals who died due to COVID-19 based on date of death')
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('deaths_fvax')
+                    ->tooltip('deaths of fully-vaccinated individuals who died due to COVID-19 based on date of death')
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('deaths_boost')
+                    ->tooltip('deaths of individuals who received a booster dose and died due to COVID-19 based on date of death')
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->numeric()
+                    ->sortable(),
+            ])
             ->filters([
                 Filter::make('date')
                     ->form([

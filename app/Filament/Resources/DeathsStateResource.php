@@ -167,12 +167,12 @@ class DeathsStateResource extends Resource
                         DatePicker::make('created_from'),
                         DatePicker::make('created_until'),
                     ])
-                    ->query(fn(Builder $query, array $data): Builder => $query
+                    ->query(fn (Builder $query, array $data): Builder => $query
                         ->when($data['created_from'],
-                            fn(Builder $query, $date): Builder => $query->whereDate('date', '>=', $date),
+                            fn (Builder $query, $date): Builder => $query->whereDate('date', '>=', $date),
                         )
                         ->when($data['created_until'],
-                            fn(Builder $query, $date): Builder => $query->whereDate('date', '<=', $date),
+                            fn (Builder $query, $date): Builder => $query->whereDate('date', '<=', $date),
                         )),
 
                 Tables\Filters\SelectFilter::make('state')
@@ -189,9 +189,9 @@ class DeathsStateResource extends Resource
                                 30 => '1 Month',
                             ]),
                     ])
-                    ->query(fn(Builder $query, array $data): Builder => $query
+                    ->query(fn (Builder $query, array $data): Builder => $query
                         ->when($data['range'],
-                            fn(Builder $query, $range): Builder => $query->whereDate('date', '>=', now()->subDays($range)),
+                            fn (Builder $query, $range): Builder => $query->whereDate('date', '>=', now()->subDays($range)),
                         )),
             ], Tables\Enums\FiltersLayout::AboveContentCollapsible)
             ->actions([

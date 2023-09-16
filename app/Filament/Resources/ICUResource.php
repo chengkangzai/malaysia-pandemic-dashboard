@@ -30,16 +30,16 @@ class ICUResource extends Resource
 
     public static function infolist(Infolist $infolist): Infolist
     {
-//date: yyyy-mm-dd format; data correct as of 2359hrs on that date
-//state: name of state, with similar qualification on exhaustiveness of date-state combos as PKRC data
-//beds_icu: total gazetted ICU beds
-//beds_icu_rep: total beds aside from (3) which are temporarily or permanently designated to be under the care of Anaesthesiology & Critical Care departments
-//beds_icu_total: total critical care beds available (with related medical infrastructure)
-//beds_icu_covid: total critical care beds dedicated for COVID-19
-//vent: total available ventilators
-//vent_port: total available portable ventilators
-//icu_x: total number of individuals in category x under intensive care, where x can be suspected/probable, COVID-19 positive, or non-COVID; this is a stock variable
-//vent_x: total number of individuals in category x on mechanical ventilation, where x can be suspected/probable, COVID-19 positive, or non-COVID; this is a stock variable
+        //date: yyyy-mm-dd format; data correct as of 2359hrs on that date
+        //state: name of state, with similar qualification on exhaustiveness of date-state combos as PKRC data
+        //beds_icu: total gazetted ICU beds
+        //beds_icu_rep: total beds aside from (3) which are temporarily or permanently designated to be under the care of Anaesthesiology & Critical Care departments
+        //beds_icu_total: total critical care beds available (with related medical infrastructure)
+        //beds_icu_covid: total critical care beds dedicated for COVID-19
+        //vent: total available ventilators
+        //vent_port: total available portable ventilators
+        //icu_x: total number of individuals in category x under intensive care, where x can be suspected/probable, COVID-19 positive, or non-COVID; this is a stock variable
+        //vent_x: total number of individuals in category x on mechanical ventilation, where x can be suspected/probable, COVID-19 positive, or non-COVID; this is a stock variable
         return $infolist
             ->schema([
                 TextEntry::make('date')->badge()->date(),
@@ -201,12 +201,12 @@ class ICUResource extends Resource
                         DatePicker::make('created_from'),
                         DatePicker::make('created_until'),
                     ])
-                    ->query(fn(Builder $query, array $data): Builder => $query
+                    ->query(fn (Builder $query, array $data): Builder => $query
                         ->when($data['created_from'],
-                            fn(Builder $query, $date): Builder => $query->whereDate('date', '>=', $date),
+                            fn (Builder $query, $date): Builder => $query->whereDate('date', '>=', $date),
                         )
                         ->when($data['created_until'],
-                            fn(Builder $query, $date): Builder => $query->whereDate('date', '<=', $date),
+                            fn (Builder $query, $date): Builder => $query->whereDate('date', '<=', $date),
                         )),
 
                 Tables\Filters\SelectFilter::make('state')
@@ -223,9 +223,9 @@ class ICUResource extends Resource
                                 30 => '1 Month',
                             ]),
                     ])
-                    ->query(fn(Builder $query, array $data): Builder => $query
+                    ->query(fn (Builder $query, array $data): Builder => $query
                         ->when($data['range'],
-                            fn(Builder $query, $range): Builder => $query->whereDate('date', '>=', now()->subDays($range)),
+                            fn (Builder $query, $range): Builder => $query->whereDate('date', '>=', now()->subDays($range)),
                         )),
             ], Tables\Enums\FiltersLayout::AboveContentCollapsible)
             ->actions([

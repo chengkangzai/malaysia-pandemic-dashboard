@@ -5,16 +5,12 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\PKRCResource\Pages;
 use App\Models\DeathsState;
 use App\Models\PKRC;
-use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\Select;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
 
 class PKRCResource extends Resource
 {

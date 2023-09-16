@@ -3,18 +3,12 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PopulationResource\Pages;
-use App\Filament\Resources\PopulationResource\RelationManagers;
-use App\Models\DeathsState;
 use App\Models\Population;
-use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class PopulationResource extends Resource
 {
