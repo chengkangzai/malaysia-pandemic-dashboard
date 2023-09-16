@@ -38,7 +38,7 @@ class DeathsMalaysiaResource extends Resource
                     ->label('New Deaths')
                     ->numeric()
                     ->helperText(str('Deaths due to COVID-19 based on **reported to the public**')->markdown()->toHtmlString()),
-                TextEntry::make('deaths_commutative')
+                TextEntry::make('deaths_new_commutative')
                     ->label('Cumulative Deaths')
                     ->numeric(),
                 TextEntry::make('deaths_new_dod')
@@ -107,7 +107,7 @@ class DeathsMalaysiaResource extends Resource
                 ->tooltip('deaths due to COVID-19 based on date reported to public')
                 ->numeric()
                 ->sortable(),
-            Tables\Columns\TextColumn::make('deaths_commutative')
+            Tables\Columns\TextColumn::make('deaths_new_commutative')
                 ->label('Cumulative Deaths')
                 ->numeric()
                 ->sortable(),
@@ -199,5 +199,11 @@ class DeathsMalaysiaResource extends Resource
         return [
             'index' => Pages\ManageDeathsMalaysias::route('/'),
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->orderByDesc('date');
     }
 }
