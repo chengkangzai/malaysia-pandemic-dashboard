@@ -20,6 +20,8 @@ class ClusterResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-circle-stack';
 
+    protected static ?string $navigationGroup = 'Covid-19 Cluster';
+
     public static function infolist(Infolist $infolist): Infolist
     {
         return $infolist
