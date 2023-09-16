@@ -293,12 +293,12 @@ class CasesStateResource extends Resource
                         DatePicker::make('from'),
                         DatePicker::make('until'),
                     ])
-                    ->query(fn(Builder $query, array $data): Builder => $query
+                    ->query(fn (Builder $query, array $data): Builder => $query
                         ->when($data['from'],
-                            fn(Builder $query, $date): Builder => $query->whereDate('date', '>=', $date),
+                            fn (Builder $query, $date): Builder => $query->whereDate('date', '>=', $date),
                         )
                         ->when($data['until'],
-                            fn(Builder $query, $date): Builder => $query->whereDate('date', '<=', $date),
+                            fn (Builder $query, $date): Builder => $query->whereDate('date', '<=', $date),
                         )),
 
                 Tables\Filters\SelectFilter::make('state')
@@ -315,9 +315,9 @@ class CasesStateResource extends Resource
                                 30 => '1 Month',
                             ]),
                     ])
-                    ->query(fn(Builder $query, array $data): Builder => $query
+                    ->query(fn (Builder $query, array $data): Builder => $query
                         ->when($data['range'],
-                            fn(Builder $query, $range): Builder => $query->whereDate('date', '>=', now()->subDays($range)),
+                            fn (Builder $query, $range): Builder => $query->whereDate('date', '>=', now()->subDays($range)),
                         )),
             ], Tables\Enums\FiltersLayout::AboveContentCollapsible)
             ->actions([
