@@ -8,6 +8,7 @@
         "php": "^8.1",
         "artesaos/seotools": "^1.2",
         "barryvdh/laravel-translation-manager": "^0.6.5",
+        "filament/filament": "^3.0-stable",
         "guzzlehttp/guzzle": "^7.8",
         "hammerstone/sidecar": "^0.4.0",
         "laravel/framework": "^10.0",
@@ -44,7 +45,8 @@
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
+            "@php artisan package:discover --ansi",
+            "@php artisan filament:upgrade"
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
