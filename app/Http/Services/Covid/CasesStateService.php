@@ -22,7 +22,7 @@ class CasesStateService
 
     public function getDeath(): Collection
     {
-        return Cache::remember('CasesState.Death', $this->cacheSecond, fn () => DeathsState::latestOne()->get())
+        return Cache::remember('CasesState.Death', $this->cacheSecond, fn() => DeathsState::latestOne()->get())
             ->map(function (DeathsState $deathsState) {
                 $deathsState->date_diffWord = $this->getDiffForHumans($deathsState->date);
 
@@ -32,7 +32,7 @@ class CasesStateService
 
     public function getCases(): Collection
     {
-        return Cache::remember('CasesState.Cases', $this->cacheSecond, fn () => CasesState::latestOne()->get())
+        return Cache::remember('CasesState.Cases', $this->cacheSecond, fn() => CasesState::latestOne()->get())
             ->map(function (CasesState $cases) {
                 $pop = $this->getPop()[$cases->state];
                 $cases->newPercentage = ($cases->cases_new / $pop) * 100;
@@ -67,7 +67,7 @@ class CasesStateService
             return CasesState::where('date', $this->getTestDateShouldQuery())->get();
         })
             ->map(function ($cases) use ($tests) {
-                $cases->positiveRate = ($cases->cases_new / $tests[$cases->state]) * 100;
+                $cases->positiveRate = rescue(fn() => ($cases->cases_new / $tests[$cases->state]) * 100, 0);
 
                 return $cases;
             });
@@ -78,7 +78,7 @@ class CasesStateService
         $deaths = $this->getDeath()->pluck('deaths_commutative', 'state');
 
         return $this->getCases()->map(function ($cases) use ($deaths) {
-            $cases->fatalityRate = ($deaths[$cases->state] / $cases->cases_cumulative) * 100;
+            $cases->fatalityRate = rescue(fn() => ($deaths[$cases->state] / $cases->cases_cumulative) * 100, 0);
 
             return $cases;
         });
@@ -100,7 +100,7 @@ class CasesStateService
 
     private function getTestDateShouldQuery(): string
     {
-        $dateOfTest = Cache::remember(__METHOD__, $this->cacheSecond, fn () => TestState::query()->orderByDesc('date')->take(1)->get()->first()->date);
+        $dateOfTest = Cache::remember(__METHOD__, $this->cacheSecond, fn() => TestState::query()->orderByDesc('date')->take(1)->get()->first()->date);
         $dateOfCase = $this->getCases()->first()->date;
 
         if ($dateOfCase == $dateOfTest) {
@@ -124,7 +124,7 @@ class CasesStateService
         $collect['cases'] = $this->getCases()->first()->date->toDateString();
         $collect['death'] = $this->getDeath()->first()->date->toDateString();
         $collect['test'] = $this->getTest()->first()->date->toDateString();
-        $collect['cluster'] = Cache::remember(__METHOD__, $this->cacheSecond, fn () => Cluster::orderByDesc('id')->first()->created_at->toDateString());
+        $collect['cluster'] = Cache::remember(__METHOD__, $this->cacheSecond, fn() => Cluster::orderByDesc('id')->first()->created_at->toDateString());
         $collect['test_dateDiffWord'] = $this->getDiffForHumans($this->getTest()->last()->date);
 
         return $collect;
