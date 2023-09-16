@@ -4,11 +4,8 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\DeathsMalaysiaResource\Pages;
 use App\Models\DeathsMalaysia;
-use App\Models\DeathsState;
-use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Form;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
@@ -98,7 +95,9 @@ class DeathsMalaysiaResource extends Resource
 
     public static function table(Table $table): Table
     {
-        return $table->columns([
+        return $table
+            ->defaultSort('date', 'desc')
+            ->columns([
             Tables\Columns\TextColumn::make('date')
                 ->date()
                 ->sortable(),
@@ -107,7 +106,7 @@ class DeathsMalaysiaResource extends Resource
                 ->tooltip('deaths due to COVID-19 based on date reported to public')
                 ->numeric()
                 ->sortable(),
-            Tables\Columns\TextColumn::make('deaths_new_commutative')
+            Tables\Columns\TextColumn::make('deaths_new_cumulative')
                 ->label('Cumulative Deaths')
                 ->numeric()
                 ->sortable(),
@@ -199,11 +198,5 @@ class DeathsMalaysiaResource extends Resource
         return [
             'index' => Pages\ManageDeathsMalaysias::route('/'),
         ];
-    }
-
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()
-            ->orderByDesc('date');
     }
 }

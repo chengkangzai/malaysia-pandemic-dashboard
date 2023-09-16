@@ -85,6 +85,7 @@ class CasesStateResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->defaultSort('date', 'desc')
             ->columns([
                 Tables\Columns\TextColumn::make('date')
                     ->date()
@@ -258,11 +259,5 @@ class CasesStateResource extends Resource
         return [
             'index' => Pages\ManageCasesStates::route('/'),
         ];
-    }
-
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()
-            ->orderByDesc('date');
     }
 }

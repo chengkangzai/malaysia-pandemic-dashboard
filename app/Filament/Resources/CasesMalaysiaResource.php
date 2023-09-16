@@ -99,6 +99,7 @@ class CasesMalaysiaResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->defaultSort('date', 'desc')
             ->columns([
                 Tables\Columns\TextColumn::make('date')
                     ->date()
@@ -265,11 +266,5 @@ class CasesMalaysiaResource extends Resource
         return [
             'index' => Pages\ManageCasesMalaysias::route('/'),
         ];
-    }
-
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()
-            ->orderByDesc('date');
     }
 }

@@ -55,6 +55,7 @@ class ClusterResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->defaultSort('date_announced', 'desc')
             ->columns([
                 Tables\Columns\TextColumn::make('cluster')
                     ->searchable(),
@@ -163,11 +164,5 @@ class ClusterResource extends Resource
         return [
             'index' => Pages\ManageClusters::route('/'),
         ];
-    }
-
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()
-            ->orderByDesc('date_announced');
     }
 }

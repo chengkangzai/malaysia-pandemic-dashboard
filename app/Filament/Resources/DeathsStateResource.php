@@ -96,81 +96,83 @@ class DeathsStateResource extends Resource
 
     public static function table(Table $table): Table
     {
-        return $table->columns([
-            Tables\Columns\TextColumn::make('date')
-                ->date()
-                ->sortable(),
-            Tables\Columns\TextColumn::make('state')
-                ->badge()
-                ->searchable(),
-            Tables\Columns\TextColumn::make('deaths_new')
-                ->label('New Deaths')
-                ->tooltip('deaths due to COVID-19 based on date reported to public')
-                ->numeric()
-                ->sortable(),
-            Tables\Columns\TextColumn::make('deaths_commutative')
-                ->label('Cumulative Deaths')
-                ->numeric()
-                ->sortable(),
-            Tables\Columns\TextColumn::make('deaths_bid')
-                ->label('Brought-in dead')
-                ->tooltip('deaths due to COVID-19 which were brought-in dead based on date reported to public')
-                ->numeric()
-                ->sortable(),
-            Tables\Columns\TextColumn::make('deaths_bid_cumulative')
-                ->label('Cumulative Brought-in dead')
-                ->numeric()
-                ->sortable(),
+        return $table
+            ->defaultSort('date', 'desc')
+            ->columns([
+                Tables\Columns\TextColumn::make('date')
+                    ->date()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('state')
+                    ->badge()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('deaths_new')
+                    ->label('New Deaths')
+                    ->tooltip('deaths due to COVID-19 based on date reported to public')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('deaths_commutative')
+                    ->label('Cumulative Deaths')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('deaths_bid')
+                    ->label('Brought-in dead')
+                    ->tooltip('deaths due to COVID-19 which were brought-in dead based on date reported to public')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('deaths_bid_cumulative')
+                    ->label('Cumulative Brought-in dead')
+                    ->numeric()
+                    ->sortable(),
 
-            Tables\Columns\TextColumn::make('deaths_tat')
-                ->label('Turnaround Time')
-                ->tooltip('median days between date of death and date of report for all deaths reported on the day')
-                ->numeric()
-                ->sortable(),
+                Tables\Columns\TextColumn::make('deaths_tat')
+                    ->label('Turnaround Time')
+                    ->tooltip('median days between date of death and date of report for all deaths reported on the day')
+                    ->numeric()
+                    ->sortable(),
 
-            Tables\Columns\TextColumn::make('deaths_new_dod')
-                ->tooltip('deaths due to COVID-19 based on date of death')
-                ->toggleable(isToggledHiddenByDefault: true)
-                ->numeric()
-                ->sortable(),
-            Tables\Columns\TextColumn::make('deaths_bid_dod')
-                ->tooltip('deaths due to COVID-19 which were brought-in dead based on date of death (perfect subset of deaths_new_dod)')
-                ->toggleable(isToggledHiddenByDefault: true)
-                ->numeric()
-                ->sortable(),
-            Tables\Columns\TextColumn::make('deaths_unvax')
-                ->tooltip('deaths of unvaccinated individuals who died due to COVID-19 based on date of death')
-                ->toggleable(isToggledHiddenByDefault: true)
-                ->numeric()
-                ->sortable(),
-            Tables\Columns\TextColumn::make('deaths_pvax')
-                ->tooltip('deaths of partially-vaccinated individuals who died due to COVID-19 based on date of death')
-                ->toggleable(isToggledHiddenByDefault: true)
-                ->numeric()
-                ->sortable(),
-            Tables\Columns\TextColumn::make('deaths_fvax')
-                ->tooltip('deaths of fully-vaccinated individuals who died due to COVID-19 based on date of death')
-                ->toggleable(isToggledHiddenByDefault: true)
-                ->numeric()
-                ->sortable(),
-            Tables\Columns\TextColumn::make('deaths_boost')
-                ->tooltip('deaths of individuals who received a booster dose and died due to COVID-19 based on date of death')
-                ->toggleable(isToggledHiddenByDefault: true)
-                ->numeric()
-                ->sortable(),
-        ])
+                Tables\Columns\TextColumn::make('deaths_new_dod')
+                    ->tooltip('deaths due to COVID-19 based on date of death')
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('deaths_bid_dod')
+                    ->tooltip('deaths due to COVID-19 which were brought-in dead based on date of death (perfect subset of deaths_new_dod)')
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('deaths_unvax')
+                    ->tooltip('deaths of unvaccinated individuals who died due to COVID-19 based on date of death')
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('deaths_pvax')
+                    ->tooltip('deaths of partially-vaccinated individuals who died due to COVID-19 based on date of death')
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('deaths_fvax')
+                    ->tooltip('deaths of fully-vaccinated individuals who died due to COVID-19 based on date of death')
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('deaths_boost')
+                    ->tooltip('deaths of individuals who received a booster dose and died due to COVID-19 based on date of death')
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->numeric()
+                    ->sortable(),
+            ])
             ->filters([
                 Filter::make('date')
                     ->form([
                         DatePicker::make('created_from'),
                         DatePicker::make('created_until'),
                     ])
-                    ->query(fn (Builder $query, array $data): Builder => $query
+                    ->query(fn(Builder $query, array $data): Builder => $query
                         ->when($data['created_from'],
-                            fn (Builder $query, $date): Builder => $query->whereDate('date', '>=', $date),
+                            fn(Builder $query, $date): Builder => $query->whereDate('date', '>=', $date),
                         )
                         ->when($data['created_until'],
-                            fn (Builder $query, $date): Builder => $query->whereDate('date', '<=', $date),
+                            fn(Builder $query, $date): Builder => $query->whereDate('date', '<=', $date),
                         )),
 
                 Tables\Filters\SelectFilter::make('state')
@@ -187,9 +189,9 @@ class DeathsStateResource extends Resource
                                 30 => '1 Month',
                             ]),
                     ])
-                    ->query(fn (Builder $query, array $data): Builder => $query
+                    ->query(fn(Builder $query, array $data): Builder => $query
                         ->when($data['range'],
-                            fn (Builder $query, $range): Builder => $query->whereDate('date', '>=', now()->subDays($range)),
+                            fn(Builder $query, $range): Builder => $query->whereDate('date', '>=', now()->subDays($range)),
                         )),
             ], Tables\Enums\FiltersLayout::AboveContentCollapsible)
             ->actions([
@@ -205,11 +207,5 @@ class DeathsStateResource extends Resource
         return [
             'index' => Pages\ManageDeathsStates::route('/'),
         ];
-    }
-
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()
-            ->orderByDesc('date');
     }
 }
