@@ -3,8 +3,6 @@
 namespace App\Livewire\PandemicDashboard;
 
 use App\Http\Services\Covid\HealthCareService;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Livewire\Component;
@@ -43,37 +41,16 @@ class HealthCareState extends Component
 
     public Collection $pkrc_covid_util;
 
-    public bool $readyToLoad = false;
-
-    public function mount()
+    public function render(HealthCareService $healthCareService): View
     {
-        $array = ['Johor' => 0, 'Kedah' => 0, 'Kelantan' => 0, 'Melaka' => 0, 'Negeri Sembilan' => 0, 'Pahang' => 0, 'Pulau Pinang' => 0, 'Perak' => 0, 'Perlis' => 0, 'Sabah' => 0, 'Sarawak' => 0, 'Selangor' => 0, 'Terengganu' => 0, 'W.P. Kuala Lumpur' => 0, 'W.P. Labuan' => 0, 'W.P. Putrajaya' => 0];
-        $this->ICUs = collect($array);
-        $this->bed_ICU = collect($array);
-        $this->hospitals = collect($array);
-        $this->bed_covid = collect($array);
-        $this->PKRC = collect($array);
-        $this->bed_PKRC = collect($array);
-        $this->totalOccupancyByState = collect($array);
-        $this->totalCovidBedByState = collect($array);
-        $this->totalUtilizationByState = collect($array);
-        $this->icu_covid_util = collect($array);
-        $this->hospital_covid_util = collect($array);
-        $this->pkrc_covid_util = collect($array);
-    }
-
-    public function render(HealthCareService $healthCareService): Factory|View|Application
-    {
-        if ($this->readyToLoad) {
-            $this->initVariable($healthCareService);
-        }
+        $this->initVariable($healthCareService);
 
         return view('livewire.pandemic-dashboard.health-care-state');
     }
 
-    public function load()
+    public function placeholder(): View
     {
-        $this->readyToLoad = true;
+        return view('livewire.pandemic-dashboard.health-care-state-placeholder');
     }
 
     private function initVariable(HealthCareService $healthCareService): void

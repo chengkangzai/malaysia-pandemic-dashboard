@@ -41,35 +41,16 @@ class CasesState extends Component
 
     public bool $readyToLoad = false;
 
-    public function mount()
+    public function render(CasesStateService $service): View
     {
-        $array = ['Johor' => 0, 'Kedah' => 0, 'Kelantan' => 0, 'Melaka' => 0, 'Negeri Sembilan' => 0, 'Pahang' => 0, 'Pulau Pinang' => 0, 'Perak' => 0, 'Perlis' => 0, 'Sabah' => 0, 'Sarawak' => 0, 'Selangor' => 0, 'Terengganu' => 0, 'W.P. Kuala Lumpur' => 0, 'W.P. Labuan' => 0, 'W.P. Putrajaya' => 0];
-        $this->newCase = collect($array);
-        $this->newDeath = collect($array);
-        $this->cumCase = collect($array);
-        $this->cumCasePercentage = collect($array);
-        $this->cumDeath = collect($array);
-        $this->fatalityRate = collect($array);
-        $this->tests = collect($array);
-        $this->positiveRate = collect($array);
-        $this->newRecovered = collect($array);
-        $this->cumRecovered = collect($array);
-        $this->activeCase = collect($array);
-        $this->activeCasePercentage = collect($array);
-    }
-
-    public function render(CasesStateService $service): Factory|View|Application
-    {
-        if ($this->readyToLoad) {
-            $this->initVariable($service);
-        }
+        $this->initVariable($service);
 
         return view('livewire.pandemic-dashboard.cases-state');
     }
 
-    public function load()
+    public function placeholder(): View
     {
-        $this->readyToLoad = true;
+        return view('livewire.pandemic-dashboard.cases-state-placeholder');
     }
 
     private function initVariable(CasesStateService $service): void

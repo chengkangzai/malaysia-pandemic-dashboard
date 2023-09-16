@@ -56,7 +56,7 @@ class Graph extends Component
         return view('livewire.pandemic-dashboard.graph');
     }
 
-    public function notifyChild()
+    public function notifyChild(): void
     {
         $this->dispatch('CovidMalaysiaUpdate',
             date: $this->date,

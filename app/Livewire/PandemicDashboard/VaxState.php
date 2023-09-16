@@ -28,32 +28,24 @@ class VaxState extends Component
 
     public bool $readyToLoad = false;
 
-    public function mount()
-    {
-        $array = ['Johor' => 0, 'Kedah' => 0, 'Kelantan' => 0, 'Melaka' => 0, 'Negeri Sembilan' => 0, 'Pahang' => 0, 'Pulau Pinang' => 0, 'Perak' => 0, 'Perlis' => 0, 'Sabah' => 0, 'Sarawak' => 0, 'Selangor' => 0, 'Terengganu' => 0, 'W.P. Kuala Lumpur' => 0, 'W.P. Labuan' => 0, 'W.P. Putrajaya' => 0];
-        $this->daily_partial = collect($array);
-        $this->daily_full = collect($array);
-        $this->daily_booster = collect($array);
-        $this->daily_booster2 = collect($array);
-        $this->vaxReg = collect($array);
-        $this->vaxRegPrecent = collect($array);
-    }
-
     public function render(VaxStateService $service): View
     {
-        if ($this->readyToLoad) {
-            $this->initVariable($service);
-        }
+        $this->initVariable($service);
 
         return view('livewire.pandemic-dashboard.vax-state');
     }
 
-    public function load()
+    public function placeholder(): View
+    {
+        return view('livewire.pandemic-dashboard.vax-state-placeholder');
+    }
+
+    public function load(): void
     {
         $this->readyToLoad = true;
     }
 
-    public function updatedPopFilter()
+    public function updatedPopFilter(): void
     {
         $this->dispatch('vaxPopulationUpdate', $this->popFilter);
     }
