@@ -10,7 +10,6 @@
         "barryvdh/laravel-translation-manager": "^0.6.5",
         "guzzlehttp/guzzle": "^7.8",
         "hammerstone/sidecar": "^0.3.12",
-        "laravel-notification-channels/webhook": "^2.4",
         "laravel/framework": "^9.52.15",
         "laravel/tinker": "^2.8.2",
         "livewire/livewire": "^2.12.6",
