@@ -11,8 +11,11 @@ use Livewire\Component;
 class ActiveCasePercentage extends Component
 {
     public Collection $date;
+
     public Collection $activeCase;
+
     public Collection $cumRecoveredCase;
+
     public Collection $cumDeathCase;
 
     public function render(): Factory|View|Application

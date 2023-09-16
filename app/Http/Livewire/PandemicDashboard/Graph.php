@@ -15,20 +15,31 @@ class Graph extends Component
     public string $filter = 'TWO_WEEK';
 
     public Collection $date;
+
     public Collection $confirmCase;
+
     public Collection $recoveredCase;
+
     public Collection $deathCase;
+
     public Collection $dodCase;
+
     public Collection $activeCase;
+
     public Collection $bidCase;
 
     public Collection $cat1;
+
     public Collection $cat2;
+
     public Collection $cat3;
+
     public Collection $cat4;
+
     public Collection $cat5;
 
     public Collection $cumRecoveredCase;
+
     public Collection $cumDeathCase;
 
     public function render(CovidMalaysiaGraphService $service): Factory|View|Application

@@ -18,16 +18,25 @@ use Livewire\Component;
 class Dashboard extends Component
 {
     public TestState $test;
+
     public CasesState $cases;
+
     public DeathsState $death;
+
     public VaxState $vax;
+
     public VaxRegState $vaxReg;
+
     public array $timestamp = [];
+
     public int $activeClusterCount = 0;
+
     public mixed $popFilter = 'ABOVE_18';
 
     public float $positiveRate = 0;
+
     public float $fatalityRate = 0;
+
     public int $positiveRateCase = 0;
 
     public string $state = 'Johor';

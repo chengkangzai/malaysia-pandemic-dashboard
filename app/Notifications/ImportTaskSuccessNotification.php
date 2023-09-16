@@ -13,12 +13,17 @@ use ReflectionException;
 class ImportTaskSuccessNotification extends Notification implements ShouldQueue
 {
     use Queueable;
+
     public const COLOR_SUCCESS = '0b6623';
+
     public const COLOR_WARNING = 'fD6a02';
+
     public const COLOR_ERROR = 'e32929';
 
     private string $message;
+
     private array $model;
+
     private int $second;
 
     public function __construct(string $message, array $model, float $second)
@@ -43,7 +48,7 @@ class ImportTaskSuccessNotification extends Notification implements ShouldQueue
             $count = $model::count();
             $totalRecord = $totalRecord + $count;
             $fields[] = [
-                'name' => (new \ReflectionClass($model))->getShortName() . ' Count',
+                'name' => (new \ReflectionClass($model))->getShortName().' Count',
                 'value' => number_format($count),
                 'inline' => true,
             ];
@@ -51,14 +56,14 @@ class ImportTaskSuccessNotification extends Notification implements ShouldQueue
 
         return WebhookMessage::create()
             ->data([
-                'username' => "Comment Broadcasts BOT",
+                'username' => 'Comment Broadcasts BOT',
                 'avatar_url' => asset('android-chrome-512x512.png'),
                 'embeds' => [
                     [
-                        'title' => (new \ReflectionClass($this->message))->getShortName() . ' run successfully',
+                        'title' => (new \ReflectionClass($this->message))->getShortName().' run successfully',
                         'type' => 'rich',
-                        'description' => 'Total time: ' . $this->second . ' seconds, ' .
-                            number_format($totalRecord) . ' records imported.',
+                        'description' => 'Total time: '.$this->second.' seconds, '.
+                            number_format($totalRecord).' records imported.',
                         'fields' => $fields,
                         'color' => hexdec(self::COLOR_SUCCESS),
                         'timestamp' => $this->timestamp ?? now(),

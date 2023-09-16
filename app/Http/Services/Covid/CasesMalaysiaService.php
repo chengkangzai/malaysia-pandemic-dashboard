@@ -23,17 +23,17 @@ class CasesMalaysiaService
 
     public function getClusterCount()
     {
-        return Cache::remember('CasesMalaysia.ClusterCount', $this->cacheSecond, fn() => Cluster::whereStatus('active')->count());
+        return Cache::remember('CasesMalaysia.ClusterCount', $this->cacheSecond, fn () => Cluster::whereStatus('active')->count());
     }
 
     public function calcFatalityRate(): float|int
     {
-        return rescue(fn() => ($this->getDeath()->deaths_new_cumulative / $this->getCases()->cases_cumulative) * 100, 0);
+        return rescue(fn () => ($this->getDeath()->deaths_new_cumulative / $this->getCases()->cases_cumulative) * 100, 0);
     }
 
     public function getDeath()
     {
-        return Cache::remember('CasesMalaysia.Death', $this->cacheSecond, fn() => DeathsMalaysia::latestOne()->get())
+        return Cache::remember('CasesMalaysia.Death', $this->cacheSecond, fn () => DeathsMalaysia::latestOne()->get())
             ->map(function (DeathsMalaysia $deaths) {
                 $deaths->date_diffWord = $this->getDiffForHumans($deaths->date);
 
@@ -44,7 +44,7 @@ class CasesMalaysiaService
 
     public function getCases()
     {
-        return Cache::remember('CasesMalaysia.Cases', $this->cacheSecond, fn() => CasesMalaysia::latestOne()->get())
+        return Cache::remember('CasesMalaysia.Cases', $this->cacheSecond, fn () => CasesMalaysia::latestOne()->get())
             ->map(function (CasesMalaysia $cases) {
                 $pop = $this->getPop();
                 $cases->newPercentage = ($cases->cases_new / $pop) * 100;
@@ -66,7 +66,7 @@ class CasesMalaysiaService
             return CasesMalaysia::where('date', $this->getTestDateShouldQuery())->get();
         })
             ->map(function ($cases) use ($tests) {
-                $cases->positiveRate = rescue(fn() => ($cases->cases_new / $tests->totalTest) * 100, 0);
+                $cases->positiveRate = rescue(fn () => ($cases->cases_new / $tests->totalTest) * 100, 0);
 
                 return $cases;
             })
@@ -88,7 +88,7 @@ class CasesMalaysiaService
 
     private function getTestDateShouldQuery(): string
     {
-        $dateOfTest = Cache::remember(__METHOD__, $this->cacheSecond, fn() => TestMalaysia::orderByDesc('date')->take(1)->get()->first()->date);
+        $dateOfTest = Cache::remember(__METHOD__, $this->cacheSecond, fn () => TestMalaysia::orderByDesc('date')->take(1)->get()->first()->date);
         $dateOfCase = $this->getCases()->date;
 
         if ($dateOfCase == $dateOfTest) {
@@ -104,7 +104,7 @@ class CasesMalaysiaService
 
     public function getVax(string $filter = Population::POP_FILTER['ALL_POPULATION'])
     {
-        return Cache::remember('CasesMalaysia.VaxMalaysia', $this->cacheSecond, fn() => VaxMalaysia::latestOne()->get())
+        return Cache::remember('CasesMalaysia.VaxMalaysia', $this->cacheSecond, fn () => VaxMalaysia::latestOne()->get())
             ->map(function (VaxMalaysia $vaxMalaysia) use ($filter) {
                 $pop = $this->getPop($filter);
                 $vaxMalaysia->firstDosePercent = ($vaxMalaysia->cumul_partial / $pop) * 100;
@@ -122,7 +122,7 @@ class CasesMalaysiaService
 
     public function getVaxReg(string $filter = Population::POP_FILTER['ALL_POPULATION'])
     {
-        return Cache::remember('CasesMalaysia.VaxRegMalaysia', $this->cacheSecond, fn() => VaxRegMalaysia::latestOne()->get())
+        return Cache::remember('CasesMalaysia.VaxRegMalaysia', $this->cacheSecond, fn () => VaxRegMalaysia::latestOne()->get())
             ->map(function ($vaxRegMalaysia) use ($filter) {
                 $vaxRegMalaysia->registeredPrecent = ($vaxRegMalaysia->total / $this->getPop($filter)) * 100;
 
@@ -158,7 +158,7 @@ class CasesMalaysiaService
 
     public function getPop(string $filter = Population::POP_FILTER['ALL_POPULATION'])
     {
-        return Cache::remember('Population', $this->cacheSecond, fn() => Population::all())
+        return Cache::remember('Population', $this->cacheSecond, fn () => Population::all())
             ->where('Idxs', 0)
             ->map(function (Population $population) {
                 $population->pop_18 = $population->pop_18 + $population->pop_60;

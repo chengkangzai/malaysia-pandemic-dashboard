@@ -22,7 +22,7 @@ class Vaccination extends Component
         $content = collect();
         $content->push("%License : Any form of copy or plagiarising of this file academically is strictly prohibited and consider as abuse.\n");
         $content->push("%Credit & Author : Ching Cheng Kang\n");
-        $content->push("%Downloaded Date : " . now()->toDateTimeString() . "\n");
+        $content->push('%Downloaded Date : '.now()->toDateTimeString()."\n");
         $content->push("%All right reserved\n\n");
         $content->push("%Vaccination Report\n");
         $content->push("%Facts \n");
@@ -40,7 +40,7 @@ class Vaccination extends Component
         $content->push("    forall(vaxreg(S,T), (write(S),write(' '),write(T),nl)).\n\n");
 
         $filePath = 'vaccination.pl';
-        Storage::put($filePath, $content->implode(""));
+        Storage::put($filePath, $content->implode(''));
 
         return Storage::download($filePath);
     }

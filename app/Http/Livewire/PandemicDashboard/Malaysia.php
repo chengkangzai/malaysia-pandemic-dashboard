@@ -17,15 +17,23 @@ use Livewire\Component;
 class Malaysia extends Component
 {
     public CasesMalaysia $cases;
+
     public DeathsMalaysia $death;
+
     public TestMalaysia $test;
+
     public VaxMalaysia $vax;
+
     public VaxRegMalaysia $vaxReg;
+
     public array $timestamp = [];
 
     public int $clusterCount = 0;
+
     public int|float $positiveRate = 0;
+
     public int|float $fatalityRate = 0;
+
     public int $positiveRateCase = 0;
 
     protected $listeners = ['vaxPopulationUpdate'];

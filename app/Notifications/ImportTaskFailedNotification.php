@@ -30,7 +30,7 @@ class ImportTaskFailedNotification extends Notification implements ShouldQueue
             ->error()
             ->line('The import task failed with the following exception:')
             ->line($this->message)
-            ->line('Timestamp: ' . now()->toDateTimeString());
+            ->line('Timestamp: '.now()->toDateTimeString());
     }
 
     public function toArray($notifiable): array

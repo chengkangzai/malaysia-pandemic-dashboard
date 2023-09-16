@@ -1,9 +1,8 @@
 <?php
 
 use App\Http\Controllers\LocaleController;
-use App\Http\Livewire\CovidVaccination\Vaccination;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PublicPandemicController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------

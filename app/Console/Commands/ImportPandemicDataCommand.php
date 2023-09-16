@@ -32,6 +32,7 @@ class ImportPandemicDataCommand extends Command
     protected $signature = 'import:pandemic {--force : Truncate existing data before importing}';
 
     protected $description = 'Import All Malaysia Pandemic Data From Github';
+
     private array $models;
 
     public function __construct()
@@ -101,7 +102,6 @@ class ImportPandemicDataCommand extends Command
 
             return self::INVALID;
         }
-
 
         return self::SUCCESS;
     }

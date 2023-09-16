@@ -9,20 +9,24 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
-use SEO;
 
 class ClusterSearch extends Component
 {
     use WithPagination;
 
     public string $search = '';
+
     public string $sort = '';
+
     public string $sortDirection = 'asc';
+
     public string $updated_at;
+
     /**
      * For Searching purpose
      */
     public string $categoryFilter = '';
+
     public string $state = '';
 
     public function mount()
@@ -40,13 +44,11 @@ class ClusterSearch extends Component
         /**
          * Set Ascending or Descending
          */
-
         if ($this->sortDirection == 'asc') {
             $this->sortDirection = 'desc';
         } else {
             $this->sortDirection = 'asc';
         }
-
 
         if ($filterBy == 'positiveRate') {
             return $this->sort = 'cases_total / tests';
@@ -61,9 +63,9 @@ class ClusterSearch extends Component
             'clusters' => Cluster::query()
                 ->when($this->search, function ($query) {
                     return $query
-                        ->orWhere('state', 'LIKE', '%' . $this->search . '%')
-                        ->orWhere('cluster', 'LIKE', '%' . $this->search . '%')
-                        ->orWhere('district', 'LIKE', '%' . $this->search . '%');
+                        ->orWhere('state', 'LIKE', '%'.$this->search.'%')
+                        ->orWhere('cluster', 'LIKE', '%'.$this->search.'%')
+                        ->orWhere('district', 'LIKE', '%'.$this->search.'%');
                 })
                 ->when($this->sort, function ($query) {
                     return $query->orderBy(DB::raw($this->sort), $this->sortDirection);

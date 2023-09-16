@@ -21,11 +21,11 @@ class CovidMalaysiaGraphService
 
     public function getCases($filter = self::FILTER['TWO_WEEK'])
     {
-        return Cache::remember(__METHOD__ . $filter, $this->cacheSecond, function () use ($filter) {
+        return Cache::remember(__METHOD__.$filter, $this->cacheSecond, function () use ($filter) {
             return DB::table('cases_malaysia')->orderByDesc('date')->take($this->getDateScope($filter))->get()->sortBy('date');
         })
             ->map(function ($case) {
-                $case->activeCase=($case->cases_cumulative - $case->cases_recovered_cumulative);
+                $case->activeCase = ($case->cases_cumulative - $case->cases_recovered_cumulative);
 
                 return $case;
             });
@@ -33,20 +33,20 @@ class CovidMalaysiaGraphService
 
     public function getDeath($filter = self::FILTER['TWO_WEEK'])
     {
-        return Cache::remember(__METHOD__ . $filter, $this->cacheSecond, function () use ($filter) {
+        return Cache::remember(__METHOD__.$filter, $this->cacheSecond, function () use ($filter) {
             return DB::table('deaths_malaysia')->orderByDesc('date')->take($this->getDateScope($filter))->get()->sortBy('date');
         });
     }
 
     public function getHealthCare($filter = self::FILTER['TWO_WEEK'])
     {
-        $icu = Cache::remember(__METHOD__ . 'icu' . $filter, $this->cacheSecond, function () use ($filter) {
+        $icu = Cache::remember(__METHOD__.'icu'.$filter, $this->cacheSecond, function () use ($filter) {
             return DB::table('icus')->orderByDesc('date')->take($this->getDateScope($filter) * 16)->get(['date', 'vent_covid', 'icu_covid']);
         });
-        $hospitals = Cache::remember(__METHOD__ . 'hospitals' . $filter, $this->cacheSecond, function () use ($filter) {
+        $hospitals = Cache::remember(__METHOD__.'hospitals'.$filter, $this->cacheSecond, function () use ($filter) {
             return DB::table('hospitals')->orderByDesc('date')->take($this->getDateScope($filter) * 16)->get(['hosp_covid', 'date']);
         });
-        $PKRCS = Cache::remember(__METHOD__ . 'PKRCS' . $filter, $this->cacheSecond, function () use ($filter) {
+        $PKRCS = Cache::remember(__METHOD__.'PKRCS'.$filter, $this->cacheSecond, function () use ($filter) {
             return DB::table('PKRC')->orderByDesc('date')->take($this->getDateScope($filter) * 16)->get(['pkrc_covid', 'date']);
         });
 
