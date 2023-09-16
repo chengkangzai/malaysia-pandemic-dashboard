@@ -197,7 +197,7 @@ class ImportPandemicService
                 $case->cases_new = self::takeIndex($item, $i++);
                 $case->cases_import = self::takeIndex($item, $i++);
                 $case->cases_recovered = self::takeIndex($item, $i++);
-                $case->cases_active = self::takeIndex($item, $i++);
+                $case->cases_active = str(self::takeIndex($item, $i++))->replace('-', '');
                 $case->cases_cluster = self::takeIndex($item, $i++);
 
                 $case->cases_unvax = self::takeIndex($item, $i++);
