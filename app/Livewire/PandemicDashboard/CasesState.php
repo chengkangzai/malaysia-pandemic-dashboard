@@ -3,8 +3,6 @@
 namespace App\Livewire\PandemicDashboard;
 
 use App\Http\Services\Covid\CasesStateService;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Livewire\Component;
