@@ -29,21 +29,21 @@ class ExportPandemicSeederCommand extends Command
 
             //check if classname prefix is Covid and extension is php
             if (str_contains($filename, 'Covid') && $extension == 'php') {
-                $this->info('Found Covid Seeder File: ' . $filename);
-                $content = file_get_contents(database_path('seeders') . '/' . $filename);
+                $this->info('Found Covid Seeder File: '.$filename);
+                $content = file_get_contents(database_path('seeders').'/'.$filename);
                 $content = str_replace('namespace Database\Seeders;', 'namespace Database\Seeders\Covid;', $content);
-                file_put_contents(database_path('seeders/Covid') . '/' . $filename, $content);
-                unlink(database_path('seeders') . '/' . $filename);
-                $this->info('Moved to Covid Seeder Folder: ' . $filename);
+                file_put_contents(database_path('seeders/Covid').'/'.$filename, $content);
+                unlink(database_path('seeders').'/'.$filename);
+                $this->info('Moved to Covid Seeder Folder: '.$filename);
             }
 
             if (str_contains($filename, 'Vax') && $extension == 'php') {
-                $this->info('Found Vax Seeder File: ' . $filename);
-                $content = file_get_contents(database_path('seeders') . '/' . $filename);
+                $this->info('Found Vax Seeder File: '.$filename);
+                $content = file_get_contents(database_path('seeders').'/'.$filename);
                 $content = str_replace('namespace Database\Seeders;', 'namespace Database\Seeders\Vax;', $content);
-                file_put_contents(database_path('seeders/Vax') . '/' . $filename, $content);
-                unlink(database_path('seeders') . '/' . $filename);
-                $this->info('Moved to Vax Seeder Folder: ' . $filename);
+                file_put_contents(database_path('seeders/Vax').'/'.$filename, $content);
+                unlink(database_path('seeders').'/'.$filename);
+                $this->info('Moved to Vax Seeder Folder: '.$filename);
             }
         }
 

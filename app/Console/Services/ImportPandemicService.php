@@ -28,24 +28,25 @@ use JetBrains\PhpStorm\ArrayShape;
 class ImportPandemicService
 {
     public const MOHBaseUrl = 'https://raw.githubusercontent.com/MoH-Malaysia/covid19-public/main';
+
     public const CITFBaseUrl = 'https://raw.githubusercontent.com/CITF-Malaysia/citf-public/main';
 
     public const url = [
-        'CASES_MALAYSIA' => self::MOHBaseUrl . '/epidemic/cases_malaysia.csv',
-        'CASES_STATE' => self::MOHBaseUrl . '/epidemic/cases_state.csv',
-        'DEATH_MALAYSIA' => self::MOHBaseUrl . '/epidemic/deaths_malaysia.csv',
-        'DEATH_STATE' => self::MOHBaseUrl . '/epidemic/deaths_state.csv',
-        'TEST_MALAYSIA' => self::MOHBaseUrl . '/epidemic/tests_malaysia.csv',
-        'TEST_STATE' => self::MOHBaseUrl . '/epidemic/tests_state.csv',
-        'CLUSTER' => self::MOHBaseUrl . '/epidemic/clusters.csv',
-        'HOSPITAL' => self::MOHBaseUrl . '/epidemic/hospital.csv',
-        'ICU' => self::MOHBaseUrl . '/epidemic/icu.csv',
-        'PKRC' => self::MOHBaseUrl . '/epidemic/pkrc.csv',
-        'POPULATION' => self::MOHBaseUrl . '/static/population.csv',
-        'VAX_MALAYSIA' => self::CITFBaseUrl . '/vaccination/vax_malaysia.csv',
-        'VAX_STATE' => self::CITFBaseUrl . '/vaccination/vax_state.csv',
-        'VAX_REG_MALAYSIA' => self::CITFBaseUrl . '/registration/vaxreg_malaysia.csv',
-        'VAX_REG_STATE' => self::CITFBaseUrl . '/registration/vaxreg_state.csv',
+        'CASES_MALAYSIA' => self::MOHBaseUrl.'/epidemic/cases_malaysia.csv',
+        'CASES_STATE' => self::MOHBaseUrl.'/epidemic/cases_state.csv',
+        'DEATH_MALAYSIA' => self::MOHBaseUrl.'/epidemic/deaths_malaysia.csv',
+        'DEATH_STATE' => self::MOHBaseUrl.'/epidemic/deaths_state.csv',
+        'TEST_MALAYSIA' => self::MOHBaseUrl.'/epidemic/tests_malaysia.csv',
+        'TEST_STATE' => self::MOHBaseUrl.'/epidemic/tests_state.csv',
+        'CLUSTER' => self::MOHBaseUrl.'/epidemic/clusters.csv',
+        'HOSPITAL' => self::MOHBaseUrl.'/epidemic/hospital.csv',
+        'ICU' => self::MOHBaseUrl.'/epidemic/icu.csv',
+        'PKRC' => self::MOHBaseUrl.'/epidemic/pkrc.csv',
+        'POPULATION' => self::MOHBaseUrl.'/static/population.csv',
+        'VAX_MALAYSIA' => self::CITFBaseUrl.'/vaccination/vax_malaysia.csv',
+        'VAX_STATE' => self::CITFBaseUrl.'/vaccination/vax_state.csv',
+        'VAX_REG_MALAYSIA' => self::CITFBaseUrl.'/registration/vaxreg_malaysia.csv',
+        'VAX_REG_STATE' => self::CITFBaseUrl.'/registration/vaxreg_state.csv',
     ];
 
     private array $recordHolder;
@@ -75,7 +76,7 @@ class ImportPandemicService
         collect(self::url)->each(fn ($_, $key) => Cache::forget($key));
     }
 
-    #[ArrayShape(['content' => "\Illuminate\Support\Collection", 'exists' => "bool"])]
+    #[ArrayShape(['content' => "\Illuminate\Support\Collection", 'exists' => 'bool'])]
     private function getRecord(string $key): array
     {
         $content = $this->recordHolder[$key];
@@ -137,7 +138,7 @@ class ImportPandemicService
 
         return $content
             ->map(function ($record) use (&$cumCasesMalaysia, &$cumRecoveredMalaysia) {
-                $item = str_getcsv(str_replace("\"", "", $record));
+                $item = str_getcsv(str_replace('"', '', $record));
                 $new_cases = self::takeIndex($item, 1);
                 $cumCasesMalaysia = $cumCasesMalaysia + $new_cases;
                 $new_recovered = self::takeIndex($item, 3);
@@ -192,7 +193,7 @@ class ImportPandemicService
                 $case = new CasesState();
                 $i = 0;
                 $case->date = self::takeIndex($item, $i++);
-                $case->state = str(self::takeIndex($item, $i++))->replace('WP','W.P.');
+                $case->state = str(self::takeIndex($item, $i++))->replace('WP', 'W.P.');
                 $case->cases_new = self::takeIndex($item, $i++);
                 $case->cases_import = self::takeIndex($item, $i++);
                 $case->cases_recovered = self::takeIndex($item, $i++);
@@ -253,7 +254,7 @@ class ImportPandemicService
 
                 $collect = new DeathsState();
                 $collect->date = self::takeIndex($item, $i++);
-                $collect->state = str(self::takeIndex($item, $i++))->replace('WP','W.P.');
+                $collect->state = str(self::takeIndex($item, $i++))->replace('WP', 'W.P.');
                 $collect->deaths_new = self::takeIndex($item, $i++);
                 $collect->deaths_bid = self::takeIndex($item, $i++);
                 $collect->deaths_new_dod = self::takeIndex($item, $i++);
@@ -362,7 +363,7 @@ class ImportPandemicService
 
                 return [
                     'date' => self::takeIndex($item, $i++),
-                    'state' => str(self::takeIndex($item, $i++))->replace('WP','W.P.'),
+                    'state' => str(self::takeIndex($item, $i++))->replace('WP', 'W.P.'),
                     'rtk_ag' => self::takeIndex($item, $i++),
                     'pcr' => self::takeIndex($item, $i++),
                 ];
@@ -383,10 +384,9 @@ class ImportPandemicService
 
                 return [
                     'cluster' => self::takeIndex($item, $i++),
-                    'state' =>
-                        collect(explode(',', self::takeIndex($item, $i++)))
-                            ->map(fn ($number) => Population::STATE[$number])
-                            ->implode(','),
+                    'state' => collect(explode(',', self::takeIndex($item, $i++)))
+                        ->map(fn ($number) => Population::STATE[$number])
+                        ->implode(','),
                     'district' => self::takeIndex($item, $i++),
                     'date_announced' => self::takeIndex($item, $i++, 'string'),
                     'date_last_onset' => self::takeIndex($item, $i++, 'string'),
@@ -419,7 +419,7 @@ class ImportPandemicService
 
                 return [
                     'date' => self::takeIndex($item, $i++),
-                    'state' => str(self::takeIndex($item, $i++))->replace('WP','W.P.'),
+                    'state' => str(self::takeIndex($item, $i++))->replace('WP', 'W.P.'),
                     'beds' => self::takeIndex($item, $i++),
                     'beds_covid' => self::takeIndex($item, $i++),
                     'beds_noncrit' => self::takeIndex($item, $i++),
@@ -450,7 +450,7 @@ class ImportPandemicService
 
                 return [
                     'date' => self::takeIndex($item, $i++),
-                    'state' => str(self::takeIndex($item, $i++))->replace('WP','W.P.'),
+                    'state' => str(self::takeIndex($item, $i++))->replace('WP', 'W.P.'),
                     'bed_icu' => self::takeIndex($item, $i++),
                     'bed_icu_rep' => self::takeIndex($item, $i++),
                     'bed_icu_total' => self::takeIndex($item, $i++),
@@ -483,7 +483,7 @@ class ImportPandemicService
 
                 return [
                     'date' => self::takeIndex($item, $i++),
-                    'state' => str(self::takeIndex($item, $i++))->replace('WP','W.P.'),
+                    'state' => str(self::takeIndex($item, $i++))->replace('WP', 'W.P.'),
                     'beds' => self::takeIndex($item, $i++),
                     'admitted_pui' => self::takeIndex($item, $i++),
                     'admitted_covid' => self::takeIndex($item, $i++),
@@ -511,7 +511,7 @@ class ImportPandemicService
                 $i = 0;
 
                 return [
-                    'state' => str(self::takeIndex($item, $i++))->replace('WP','W.P.'),
+                    'state' => str(self::takeIndex($item, $i++))->replace('WP', 'W.P.'),
                     'idxs' => self::takeIndex($item, $i++),
                     'pop' => self::takeIndex($item, $i++),
                     'pop_18' => self::takeIndex($item, $i++),
@@ -602,7 +602,7 @@ class ImportPandemicService
 
                 return [
                     'date' => $this->takeIndex($vax, $i++),
-                    'state' => str($this->takeIndex($vax, $i++))->replace('WP','W.P.'),
+                    'state' => str($this->takeIndex($vax, $i++))->replace('WP', 'W.P.'),
                     'daily_partial' => $this->takeIndex($vax, $i++),
                     'daily_full' => $this->takeIndex($vax, $i++),
                     'daily_booster' => $this->takeIndex($vax, $i++),
@@ -662,7 +662,7 @@ class ImportPandemicService
 
         return [
             'date' => $this->takeIndex($array, $i++),
-            'state' => str($this->takeIndex($array, $i++))->replace('WP','W.P.'),
+            'state' => str($this->takeIndex($array, $i++))->replace('WP', 'W.P.'),
             'total' => $this->takeIndex($array, $i++),
             'phase2' => $this->takeIndex($array, $i++),
             'mysj' => $this->takeIndex($array, $i++),

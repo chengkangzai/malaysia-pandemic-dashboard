@@ -12,8 +12,11 @@ use Livewire\Component;
 class VaxTakenWeekly extends Component
 {
     public bool $readyToLoad = false;
+
     public Collection $vaxs;
+
     public int $weekToLoad = 7;
+
     public int $weekToLoadMax;
 
     public function mount()

@@ -28,7 +28,7 @@ class CasesMalaysiaService
 
     public function calcFatalityRate(): float|int
     {
-        return ($this->getDeath()->deaths_new_cumulative / $this->getCases()->cases_cumulative) * 100;
+        return rescue(fn () => ($this->getDeath()->deaths_new_cumulative / $this->getCases()->cases_cumulative) * 100, 0);
     }
 
     public function getDeath()
@@ -66,7 +66,7 @@ class CasesMalaysiaService
             return CasesMalaysia::where('date', $this->getTestDateShouldQuery())->get();
         })
             ->map(function ($cases) use ($tests) {
-                $cases->positiveRate = ($cases->cases_new / $tests->totalTest) * 100;
+                $cases->positiveRate = rescue(fn () => ($cases->cases_new / $tests->totalTest) * 100, 0);
 
                 return $cases;
             })

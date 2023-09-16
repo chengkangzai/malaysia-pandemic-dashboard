@@ -22,7 +22,7 @@ class Head extends Component
 
     public function updatedState()
     {
-        $this->emit("CovidStateUpdate", $this->state);
+        $this->emit('CovidStateUpdate', $this->state);
     }
 
     public function CovidStateUpdate(string $state)
@@ -32,6 +32,6 @@ class Head extends Component
 
     public function updatedPopFilter()
     {
-        $this->emit("vaxPopulationUpdate", $this->popFilter);
+        $this->emit('vaxPopulationUpdate', $this->popFilter);
     }
 }

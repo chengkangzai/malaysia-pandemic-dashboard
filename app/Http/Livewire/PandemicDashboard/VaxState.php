@@ -14,21 +14,26 @@ use Livewire\Component;
 class VaxState extends Component
 {
     public Collection $daily_partial;
+
     public Collection $daily_full;
+
     public Collection $daily_booster;
+
     public Collection $daily_booster2;
 
     public Collection $vaxReg;
+
     public Collection $vaxRegPrecent;
 
     public string $timestamp = '';
+
     public mixed $popFilter = 'ABOVE_18';
 
     public bool $readyToLoad = false;
 
     public function mount()
     {
-        $array = ["Johor" => 0, "Kedah" => 0, "Kelantan" => 0, "Melaka" => 0, "Negeri Sembilan" => 0, "Pahang" => 0, "Pulau Pinang" => 0, "Perak" => 0, "Perlis" => 0, "Sabah" => 0, "Sarawak" => 0, "Selangor" => 0, "Terengganu" => 0, "W.P. Kuala Lumpur" => 0, "W.P. Labuan" => 0, "W.P. Putrajaya" => 0,];
+        $array = ['Johor' => 0, 'Kedah' => 0, 'Kelantan' => 0, 'Melaka' => 0, 'Negeri Sembilan' => 0, 'Pahang' => 0, 'Pulau Pinang' => 0, 'Perak' => 0, 'Perlis' => 0, 'Sabah' => 0, 'Sarawak' => 0, 'Selangor' => 0, 'Terengganu' => 0, 'W.P. Kuala Lumpur' => 0, 'W.P. Labuan' => 0, 'W.P. Putrajaya' => 0];
         $this->daily_partial = collect($array);
         $this->daily_full = collect($array);
         $this->daily_booster = collect($array);
@@ -38,14 +43,14 @@ class VaxState extends Component
     }
 
     #[NoReturn]
- public function render(VaxStateService $service): Factory|View|Application
- {
-     if ($this->readyToLoad) {
-         $this->initVariable($service);
-     }
+    public function render(VaxStateService $service): Factory|View|Application
+    {
+        if ($this->readyToLoad) {
+            $this->initVariable($service);
+        }
 
-     return view('livewire.pandemic-dashboard.vax-state');
- }
+        return view('livewire.pandemic-dashboard.vax-state');
+    }
 
     public function load()
     {
@@ -54,7 +59,7 @@ class VaxState extends Component
 
     public function updatedPopFilter()
     {
-        $this->emit("vaxPopulationUpdate", $this->popFilter);
+        $this->emit('vaxPopulationUpdate', $this->popFilter);
     }
 
     private function initVariable(VaxStateService $service): void

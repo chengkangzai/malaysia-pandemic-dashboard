@@ -67,7 +67,7 @@ class CasesStateService
             return CasesState::where('date', $this->getTestDateShouldQuery())->get();
         })
             ->map(function ($cases) use ($tests) {
-                $cases->positiveRate = ($cases->cases_new / $tests[$cases->state]) * 100;
+                $cases->positiveRate = rescue(fn () => ($cases->cases_new / $tests[$cases->state]) * 100, 0);
 
                 return $cases;
             });
@@ -78,7 +78,7 @@ class CasesStateService
         $deaths = $this->getDeath()->pluck('deaths_commutative', 'state');
 
         return $this->getCases()->map(function ($cases) use ($deaths) {
-            $cases->fatalityRate = ($deaths[$cases->state] / $cases->cases_cumulative) * 100;
+            $cases->fatalityRate = rescue(fn () => ($deaths[$cases->state] / $cases->cases_cumulative) * 100, 0);
 
             return $cases;
         });
@@ -86,7 +86,7 @@ class CasesStateService
 
     public function getClusterCount(string $state): int
     {
-        return Cache::remember(__METHOD__ . $state, $this->cacheSecond, function () use ($state) {
+        return Cache::remember(__METHOD__.$state, $this->cacheSecond, function () use ($state) {
             return Cluster::where('state', $state)->count();
         });
     }

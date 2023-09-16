@@ -15,9 +15,11 @@ class DisplayMore extends Component
     public bool $readyToLoad = false;
 
     public int $vaxDaysToShow = 7;
+
     public int $regDaysToShow = 7;
 
     public Collection $vaxs;
+
     public Collection $regs;
 
     public function mount()

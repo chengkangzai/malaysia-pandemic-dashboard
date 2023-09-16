@@ -13,26 +13,39 @@ use Livewire\Component;
 class Graph extends Component
 {
     public string $state = 'Johor';
+
     public string $filter = 'TWO_WEEK';
 
     protected $listeners = ['CovidStateUpdate'];
 
     public Collection $date;
+
     public Collection $confirmCase;
+
     public Collection $recoveredCase;
+
     public Collection $deathCase;
+
     public Collection $activeCase;
+
     public Collection $bidCase;
+
     public Collection $dodCase;
 
     public Collection $cat1;
+
     public Collection $cat2;
+
     public Collection $cat3;
+
     public Collection $cat4;
+
     public Collection $cat5;
 
     public Collection $cumRecoveredCase;
+
     public Collection $cumDeathCase;
+
     private CovidStateGraphService $service;
 
     public bool $readyToLoad = false;
@@ -68,7 +81,7 @@ class Graph extends Component
 
     public function updatedState()
     {
-        $this->emit("CovidStateUpdate", $this->state);
+        $this->emit('CovidStateUpdate', $this->state);
     }
 
     public function CovidStateUpdate(string $state)

@@ -20,42 +20,42 @@ class Cluster extends Model
     protected $guarded = [];
 
     public const CLUSTER_CATEGORY = [
-        "import" => "Import",
-        "religious" => "Religious",
-        "workplace" => "Workplace",
-        "highRisk" => "High Risk",
-        "community" => "Community",
-        "detentionCentre" => "Detention Centre",
-        "education" => "Education",
+        'import' => 'Import',
+        'religious' => 'Religious',
+        'workplace' => 'Workplace',
+        'highRisk' => 'High Risk',
+        'community' => 'Community',
+        'detentionCentre' => 'Detention Centre',
+        'education' => 'Education',
     ];
 
     public const STATE = [
-        "Johor" => "Johor",
-        "Kedah" => "Kedah",
-        "Kelantan" => "Kelantan",
-        "Melaka" => "Melaka",
-        "Negeri Sembilan" => "Negeri Sembilan",
-        "Pahang" => "Pahang",
-        "Pulau Pinang" => "Pulau Pinang",
-        "Perak" => "Perak",
-        "Perlis" => "Perlis",
-        "Sabah" => "Sabah",
-        "Sarawak" => "Sarawak",
-        "Selangor" => "Selangor",
-        "Terengganu" => "Terengganu",
-        "W.P. Kuala Lumpur" => "W.P. Kuala Lumpur",
-        "W.P. Labuan" => "W.P. Labuan",
-        "W.P. Putrajaya" => "W.P. Putrajaya",
+        'Johor' => 'Johor',
+        'Kedah' => 'Kedah',
+        'Kelantan' => 'Kelantan',
+        'Melaka' => 'Melaka',
+        'Negeri Sembilan' => 'Negeri Sembilan',
+        'Pahang' => 'Pahang',
+        'Pulau Pinang' => 'Pulau Pinang',
+        'Perak' => 'Perak',
+        'Perlis' => 'Perlis',
+        'Sabah' => 'Sabah',
+        'Sarawak' => 'Sarawak',
+        'Selangor' => 'Selangor',
+        'Terengganu' => 'Terengganu',
+        'W.P. Kuala Lumpur' => 'W.P. Kuala Lumpur',
+        'W.P. Labuan' => 'W.P. Labuan',
+        'W.P. Putrajaya' => 'W.P. Putrajaya',
     ];
 
     public function scopeFilterByState(Builder $query, $state): Builder
     {
-        return $query->where('state', 'LIKE', '%' . $state . '%');
+        return $query->where('state', 'LIKE', '%'.$state.'%');
     }
 
     public function scopeFilterByClusterName(Builder $query, $clusterName): Builder
     {
-        return $query->where('cluster', 'LIKE', '%' . $clusterName . '%');
+        return $query->where('cluster', 'LIKE', '%'.$clusterName.'%');
     }
 
     public function scopeActive(Builder $query): Builder

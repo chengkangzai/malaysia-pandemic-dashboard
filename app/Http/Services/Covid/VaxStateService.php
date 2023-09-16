@@ -20,7 +20,7 @@ class VaxStateService
 
     public function getVax(string $filter = Population::POP_FILTER['ALL_POPULATION']): Collection
     {
-        return Cache::remember(__METHOD__ . $filter, $this->cacheSecond, fn () => VaxState::latestOne()->get())
+        return Cache::remember(__METHOD__.$filter, $this->cacheSecond, fn () => VaxState::latestOne()->get())
             ->map(function ($vaxState) use ($filter) {
                 $pop = $this->getPop($filter)[$vaxState->state];
                 $vaxState->firstDoseDailyPercent = ($vaxState->daily_partial / $pop) * 100;
@@ -37,7 +37,7 @@ class VaxStateService
 
     public function getVaxReg(string $filter = Population::POP_FILTER['ALL_POPULATION']): Collection
     {
-        return Cache::remember(__METHOD__ . $filter, $this->cacheSecond, fn () => VaxRegState::latestOne()->get())
+        return Cache::remember(__METHOD__.$filter, $this->cacheSecond, fn () => VaxRegState::latestOne()->get())
             ->map(function ($vaxRegState) use ($filter) {
                 $pop = $this->getPop($filter)[$vaxRegState->state];
                 $vaxRegState->registeredPrecent = ($vaxRegState->total / $pop) * 100;

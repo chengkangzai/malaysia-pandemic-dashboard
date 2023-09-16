@@ -15,27 +15,39 @@ class HealthCareState extends Component
      * Variable for rendering
      */
     public Collection $ICUs;
+
     public Collection $bed_ICU;
+
     public Collection $hospitals;
+
     public Collection $bed_covid;
+
     public Collection $PKRC;
+
     public Collection $bed_PKRC;
+
     public string $updated_at = '';
+
     /**
      * Calculated Value
      */
     public Collection $totalOccupancyByState;
+
     public Collection $totalCovidBedByState;
+
     public Collection $totalUtilizationByState;
+
     public Collection $icu_covid_util;
+
     public Collection $hospital_covid_util;
+
     public Collection $pkrc_covid_util;
 
     public bool $readyToLoad = false;
 
     public function mount()
     {
-        $array = ["Johor" => 0, "Kedah" => 0, "Kelantan" => 0, "Melaka" => 0, "Negeri Sembilan" => 0, "Pahang" => 0, "Pulau Pinang" => 0, "Perak" => 0, "Perlis" => 0, "Sabah" => 0, "Sarawak" => 0, "Selangor" => 0, "Terengganu" => 0, "W.P. Kuala Lumpur" => 0, "W.P. Labuan" => 0, "W.P. Putrajaya" => 0,];
+        $array = ['Johor' => 0, 'Kedah' => 0, 'Kelantan' => 0, 'Melaka' => 0, 'Negeri Sembilan' => 0, 'Pahang' => 0, 'Pulau Pinang' => 0, 'Perak' => 0, 'Perlis' => 0, 'Sabah' => 0, 'Sarawak' => 0, 'Selangor' => 0, 'Terengganu' => 0, 'W.P. Kuala Lumpur' => 0, 'W.P. Labuan' => 0, 'W.P. Putrajaya' => 0];
         $this->ICUs = collect($array);
         $this->bed_ICU = collect($array);
         $this->hospitals = collect($array);

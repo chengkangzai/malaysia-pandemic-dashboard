@@ -38,7 +38,7 @@ class InjestStation
 
     public function truncate(array $models)
     {
-        $this->console->info("Truncating...");
+        $this->console->info('Truncating...');
         $this->console->getOutput()->progressStart(count($models));
 
         /** @var Model $model */

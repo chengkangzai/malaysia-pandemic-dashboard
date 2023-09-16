@@ -14,7 +14,9 @@ use Livewire\Component;
 class HealthCare extends Component
 {
     public ICU $ICU;
+
     public Hospital $hospital;
+
     public PKRC|null $PKRC;
 
     public string $state = 'Johor';
@@ -51,7 +53,7 @@ class HealthCare extends Component
 
     public function updatedState()
     {
-        $this->emit("CovidStateUpdate", $this->state);
+        $this->emit('CovidStateUpdate', $this->state);
     }
 
     private function initVariable(HealthCareService $service): void
