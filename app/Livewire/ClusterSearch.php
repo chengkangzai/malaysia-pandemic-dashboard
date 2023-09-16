@@ -29,12 +29,12 @@ class ClusterSearch extends Component
 
     public string $state = '';
 
-    public function mount()
+    public function mount(): void
     {
         $this->updated_at = cache()->remember('cluster', 60, fn () => Cluster::orderByDesc('id')->first())->updated_at;
     }
 
-    public function updatedSearch()
+    public function updatedSearch(): void
     {
         $this->resetPage();
     }
@@ -57,7 +57,7 @@ class ClusterSearch extends Component
         return $this->sort = $filterBy;
     }
 
-    public function render(): Factory|View|Application
+    public function render(): View
     {
         return view('livewire.cluster-search', [
             'clusters' => Cluster::query()

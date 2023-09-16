@@ -1,5 +1,5 @@
 <div class="container min-h-screen">
-    <div class="my-2 w-full rounded-2xl rounded-2xl bg-gray-50 py-4 px-4 shadow dark:bg-white">
+    <div class="my-2 w-full rounded-2xl bg-gray-50 py-4 px-4 shadow dark:bg-white">
         <div class="pb-2">
             <label class="w-full text-left">
                 <span>{{ __('Search any input') }}</span>
