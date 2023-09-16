@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\CasesMalaysiaResource\Pages;
 use App\Models\CasesMalaysia;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Select;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
@@ -18,7 +19,7 @@ class CasesMalaysiaResource extends Resource
 {
     protected static ?string $model = CasesMalaysia::class;
 
-    protected static ?string $label = 'Malaysia Covid Cases';
+    protected static ?string $label = 'National Cases';
 
     protected static ?string $navigationIcon = 'heroicon-o-bug-ant';
 
@@ -237,6 +238,20 @@ class CasesMalaysiaResource extends Resource
                             fn (Builder $query, $date): Builder => $query->whereDate('date', '<=', $date),
                         )),
 
+                Tables\Filters\SelectFilter::make('date_range')
+                    ->form([
+                        Select::make('range')
+                            ->options([
+                                7 => '7 Days',
+                                14 => '14 Days',
+                                30 => '1 Month',
+                            ]),
+                    ])
+                    ->query(fn (Builder $query, array $data): Builder => $query
+                        ->when($data['range'],
+                            fn (Builder $query, $range): Builder => $query->whereDate('date', '>=', now()->subDays($range)),
+                        )
+                    ),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),

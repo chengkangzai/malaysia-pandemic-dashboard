@@ -71,15 +71,15 @@ class ClusterResource extends Resource
                     ->badge()
                     ->searchable(),
                 Tables\Columns\IconColumn::make('status')
-                    ->icon(fn(string $state): string => match ($state) {
+                    ->icon(fn (string $state): string => match ($state) {
                         'ended' => 'heroicon-o-check-circle',
                         default => 'heroicon-o-exclamation-circle',
                     })
-                    ->color(fn(string $state): string => match ($state) {
+                    ->color(fn (string $state): string => match ($state) {
                         'ended' => 'success',
                         default => 'danger',
                     })
-                    ->tooltip(fn(string $state): string => match ($state) {
+                    ->tooltip(fn (string $state): string => match ($state) {
                         'ended' => 'Ended',
                         default => 'Active',
                     })
@@ -122,12 +122,12 @@ class ClusterResource extends Resource
                         DatePicker::make('announced_from'),
                         DatePicker::make('announced_until'),
                     ])
-                    ->query(fn(Builder $query, array $data): Builder => $query
+                    ->query(fn (Builder $query, array $data): Builder => $query
                         ->when($data['announced_from'],
-                            fn(Builder $query, $date): Builder => $query->whereDate('date_announced', '>=', $date),
+                            fn (Builder $query, $date): Builder => $query->whereDate('date_announced', '>=', $date),
                         )
                         ->when($data['announced_until'],
-                            fn(Builder $query, $date): Builder => $query->whereDate('date_announced', '<=', $date),
+                            fn (Builder $query, $date): Builder => $query->whereDate('date_announced', '<=', $date),
                         )),
 
                 Filter::make('date_last_onset')
@@ -136,21 +136,20 @@ class ClusterResource extends Resource
                         DatePicker::make('last_on_set_from'),
                         DatePicker::make('last_on_set_until'),
                     ])
-                    ->query(fn(Builder $query, array $data): Builder => $query
+                    ->query(fn (Builder $query, array $data): Builder => $query
                         ->when($data['last_on_set_from'],
-                            fn(Builder $query, $date): Builder => $query->whereDate('date_last_onset', '>=', $date),
+                            fn (Builder $query, $date): Builder => $query->whereDate('date_last_onset', '>=', $date),
                         )
                         ->when($data['last_on_set_until'],
-                            fn(Builder $query, $date): Builder => $query->whereDate('date_last_onset', '<=', $date),
+                            fn (Builder $query, $date): Builder => $query->whereDate('date_last_onset', '<=', $date),
                         )),
 
                 Tables\Filters\SelectFilter::make('category')
                     ->label('Category')
                     ->attribute('category')
-                    ->options(fn() => Cluster::distinct()->select('category')->pluck('category', 'category')),
+                    ->options(fn () => Cluster::distinct()->select('category')->pluck('category', 'category')),
 
             ], Tables\Enums\FiltersLayout::AboveContentCollapsible)
-            ->filtersFormColumns(3)
             ->actions([
                 Tables\Actions\ViewAction::make(),
             ])

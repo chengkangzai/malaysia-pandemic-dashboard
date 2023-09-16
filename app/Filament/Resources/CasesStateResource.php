@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\CasesStateResource\Pages;
 use App\Models\CasesState;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Select;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
@@ -18,7 +19,7 @@ class CasesStateResource extends Resource
 {
     protected static ?string $model = CasesState::class;
 
-    protected static ?string $label = 'State Cases';
+    protected static ?string $label = 'States Cases';
 
     protected static ?string $navigationIcon = 'heroicon-o-bug-ant';
 
@@ -214,14 +215,14 @@ class CasesStateResource extends Resource
             ->filters([
                 Filter::make('date')
                     ->form([
-                        DatePicker::make('created_from'),
-                        DatePicker::make('created_until'),
+                        DatePicker::make('from'),
+                        DatePicker::make('until'),
                     ])
                     ->query(fn (Builder $query, array $data): Builder => $query
-                        ->when($data['created_from'],
+                        ->when($data['from'],
                             fn (Builder $query, $date): Builder => $query->whereDate('date', '>=', $date),
                         )
-                        ->when($data['created_until'],
+                        ->when($data['until'],
                             fn (Builder $query, $date): Builder => $query->whereDate('date', '<=', $date),
                         )),
 
@@ -229,8 +230,21 @@ class CasesStateResource extends Resource
                     ->options(CasesState::STATE)
                     ->searchable()
                     ->attribute('state'),
+
+                Tables\Filters\SelectFilter::make('date_range')
+                    ->form([
+                        Select::make('range')
+                            ->options([
+                                7 => '7 Days',
+                                14 => '14 Days',
+                                30 => '1 Month',
+                            ]),
+                    ])
+                    ->query(fn (Builder $query, array $data): Builder => $query
+                        ->when($data['range'],
+                            fn (Builder $query, $range): Builder => $query->whereDate('date', '>=', now()->subDays($range)),
+                        )),
             ], Tables\Enums\FiltersLayout::AboveContentCollapsible)
-            ->filtersFormColumns(2)
             ->actions([
                 Tables\Actions\ViewAction::make(),
             ])
