@@ -17,7 +17,7 @@ class HealthCare extends Component
 
     public Hospital $hospital;
 
-    public PKRC|null $PKRC;
+    public ?PKRC $PKRC;
 
     public string $state = 'Johor';
 
