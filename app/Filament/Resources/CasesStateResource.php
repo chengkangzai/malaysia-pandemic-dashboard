@@ -20,7 +20,9 @@ class CasesStateResource extends Resource
 
     protected static ?string $label = 'State Cases';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-bug-ant';
+
+    protected static ?string $navigationGroup = 'Covid-19 Cases';
 
     public static function infolist(Infolist $infolist): Infolist
     {
