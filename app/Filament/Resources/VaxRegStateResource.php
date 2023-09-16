@@ -14,8 +14,10 @@ use Filament\Tables\Table;
 class VaxRegStateResource extends Resource
 {
     protected static ?string $model = VaxRegState::class;
+    protected static ?string $label = 'State';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = 'Vaccination Registration';
+    protected static ?string $navigationIcon = 'heroicon-o-pencil';
 
     public static function form(Form $form): Form
     {
