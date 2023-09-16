@@ -9,7 +9,7 @@
                 <div>
                     <label>
                         {{ __('Filter By') }} :
-                        <select class="bg-white ring ring-gray-200 mx-2 px-4 py-1 rounded" wire:model="state">
+                        <select class="bg-white ring ring-gray-200 mx-2 px-4 py-1 rounded" wire:model.live="state">
                             <option disabled>-----</option>
                             @foreach (\App\Models\CasesState::STATE as $key => $filter)
                                 <option value="{{ $key }}">
@@ -23,7 +23,7 @@
                 <div>
                     <label>
                         {{ __('Filter By') }} :
-                        <select class="bg-white ring ring-gray-200 mx-2 px-4 py-1 rounded" wire:model="filter">
+                        <select class="bg-white ring ring-gray-200 mx-2 px-4 py-1 rounded" wire:model.live="filter">
                             <option disabled>-----</option>
                             @foreach (\App\Http\Services\Covid\Graph\CovidStateGraphService::FILTER as $filter)
                                 <option value="{{ $filter }}">

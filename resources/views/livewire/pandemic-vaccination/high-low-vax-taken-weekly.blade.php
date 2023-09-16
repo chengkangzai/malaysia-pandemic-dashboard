@@ -19,7 +19,7 @@
                                         <label>
                                             <span
                                                 class="inline-flex text-sm font-medium leading-5 text-gray-700">{{ __('Filter by') }}</span>
-                                            <select wire:model="weekToLoad" class="rounded-lg">
+                                            <select wire:model.live="weekToLoad" class="rounded-lg">
                                                 <option value="7">{{ __('Last 7 weeks') }}</option>
                                                 <option value="14">{{ __('Last 14 weeks') }}</option>
                                                 <option value="30">{{ __('Last 30 weeks') }}</option>

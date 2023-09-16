@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\PandemicDashboard;
+namespace App\Livewire\PandemicDashboard;
 
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;

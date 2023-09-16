@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\PandemicDashboard\Graph;
+namespace App\Livewire\PandemicState\Graph;
 
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -8,18 +8,24 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 
-class ActiveCasePercentage extends Component
+class ActiveCaseVsHealthCare extends Component
 {
     public Collection $date;
 
     public Collection $activeCase;
 
-    public Collection $cumRecoveredCase;
+    public Collection $cat1;
 
-    public Collection $cumDeathCase;
+    public Collection $cat2;
+
+    public Collection $cat3;
+
+    public Collection $cat4;
+
+    public Collection $cat5;
 
     public function render(): Factory|View|Application
     {
-        return view('livewire.pandemic-dashboard.graph.active-case-percentage');
+        return view('livewire.pandemic-state.graph.active-case-vs-health-care');
     }
 }

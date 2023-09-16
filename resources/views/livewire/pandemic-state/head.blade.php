@@ -6,7 +6,7 @@
     <div class="container space-y-2 sm:space-y-0 sm:flex sm:flex-row-reverse">
         <label>
             {{ __('Filter By') }} :
-            <select class="bg-white ring ring-gray-200 mx-2 rounded" wire:model="state">
+            <select class="bg-white ring ring-gray-200 mx-2 rounded" wire:model.live="state">
                 <option disabled>-----</option>
                 @foreach (\App\Models\CasesState::STATE as $key => $filter)
                     <option value="{{ $key }}">
@@ -16,7 +16,7 @@
             </select>
         </label>
         <label>
-            <select class="bg-white ring ring-gray-200 mx-2 rounded" wire:model="popFilter">
+            <select class="bg-white ring ring-gray-200 mx-2 rounded" wire:model.live="popFilter">
                 @foreach (\App\Models\Population::POP_FILTER as $key => $filter)
                     <option value="{{ $key }}">
                         {{ __($key) }}

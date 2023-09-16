@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\PandemicState;
+namespace App\Livewire\PandemicState;
 
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -22,7 +22,7 @@ class Head extends Component
 
     public function updatedState()
     {
-        $this->emit('CovidStateUpdate', $this->state);
+        $this->dispatch('CovidStateUpdate', $this->state);
     }
 
     public function CovidStateUpdate(string $state)
@@ -32,6 +32,6 @@ class Head extends Component
 
     public function updatedPopFilter()
     {
-        $this->emit('vaxPopulationUpdate', $this->popFilter);
+        $this->dispatch('vaxPopulationUpdate', $this->popFilter);
     }
 }

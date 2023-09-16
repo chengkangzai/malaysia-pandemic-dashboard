@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\PandemicState\Graph;
+namespace App\Livewire\PandemicState\Graph;
 
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -8,18 +8,16 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 
-class DeathPerDay extends Component
+class CasePerDay extends Component
 {
     public Collection $date;
 
-    public Collection $deathCase;
+    public Collection $confirmCase;
 
-    public Collection $bidCase;
-
-    public Collection $dodCase;
+    public Collection $recoveredCase;
 
     public function render(): Factory|View|Application
     {
-        return view('livewire.pandemic-state.graph.death-per-day');
+        return view('livewire.pandemic-state.graph.case-per-day');
     }
 }

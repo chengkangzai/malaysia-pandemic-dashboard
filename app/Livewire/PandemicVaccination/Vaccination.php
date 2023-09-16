@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\PandemicVaccination;
+namespace App\Livewire\PandemicVaccination;
 
 use App\Models\VaxRegState;
 use Illuminate\Contracts\Foundation\Application;

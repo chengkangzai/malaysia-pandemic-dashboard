@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\PandemicState;
+namespace App\Livewire\PandemicState;
 
 use App\Http\Services\Covid\Graph\CovidStateGraphService;
 use Carbon\Carbon;
@@ -81,7 +81,7 @@ class Graph extends Component
 
     public function updatedState()
     {
-        $this->emit('CovidStateUpdate', $this->state);
+        $this->dispatch('CovidStateUpdate', $this->state);
     }
 
     public function CovidStateUpdate(string $state)

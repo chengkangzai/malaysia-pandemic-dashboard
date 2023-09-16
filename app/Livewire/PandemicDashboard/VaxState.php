@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\PandemicDashboard;
+namespace App\Livewire\PandemicDashboard;
 
 use App\Http\Services\Covid\VaxStateService;
 use App\Models\Population;
@@ -59,7 +59,7 @@ class VaxState extends Component
 
     public function updatedPopFilter()
     {
-        $this->emit('vaxPopulationUpdate', $this->popFilter);
+        $this->dispatch('vaxPopulationUpdate', $this->popFilter);
     }
 
     private function initVariable(VaxStateService $service): void

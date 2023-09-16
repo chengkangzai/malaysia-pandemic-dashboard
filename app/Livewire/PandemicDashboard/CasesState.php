@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\PandemicDashboard;
+namespace App\Livewire\PandemicDashboard;
 
 use App\Http\Services\Covid\CasesStateService;
 use Illuminate\Contracts\Foundation\Application;

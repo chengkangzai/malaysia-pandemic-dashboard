@@ -23,7 +23,7 @@
                                         <label>
                                             <span
                                                 class="inline-flex text-sm font-medium leading-5 text-gray-700">{{ __('Filter by') }}</span>
-                                            <select wire:model="vaxDaysToShow" class="rounded-lg">
+                                            <select wire:model.live="vaxDaysToShow" class="rounded-lg">
                                                 <option value="7">{{ __('Last 7 days') }}</option>
                                                 <option value="14">{{ __('Last 14 days') }}</option>
                                                 <option value="30">{{ __('Last 30 days') }}</option>
@@ -416,7 +416,7 @@
                                         <label>
                                             <span
                                                 class="inline-flex text-sm font-medium leading-5 text-gray-700">{{ __('Filter by') }}</span>
-                                            <select wire:model="regDaysToShow" class="rounded-lg">
+                                            <select wire:model.live="regDaysToShow" class="rounded-lg">
                                                 <option value="7">{{ __('Last 7 days') }}</option>
                                                 <option value="14">{{ __('Last 14 days') }}</option>
                                                 <option value="30">{{ __('Last 30 days') }}</option>

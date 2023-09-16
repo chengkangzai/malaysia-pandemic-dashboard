@@ -12,7 +12,7 @@
         "hammerstone/sidecar": "^0.4.0",
         "laravel/framework": "^10.0",
         "laravel/tinker": "^2.8.2",
-        "livewire/livewire": "^2.12.6",
+        "livewire/livewire": "^3.0",
         "silviolleite/laravelpwa": "^2.0.3",
         "spatie/browsershot": "^3.58.2",
         "wnx/sidecar-browsershot": "^1.6.3"

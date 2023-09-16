@@ -13,7 +13,7 @@
                                 <div class="container flex flex-row-reverse">
                                     <label>
                                         <select class="bg-white ring ring-gray-200 mx-2 rounded"
-                                            wire:model="popFilter">
+                                            wire:model.live="popFilter">
                                             @foreach (\App\Models\Population::POP_FILTER as $key => $filter)
                                                 <option value="{{ $key }}">
                                                     {{ __($key) }}

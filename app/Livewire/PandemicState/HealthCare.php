@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\PandemicState;
+namespace App\Livewire\PandemicState;
 
 use App\Http\Services\Covid\HealthCareService;
 use App\Models\Hospital;
@@ -53,7 +53,7 @@ class HealthCare extends Component
 
     public function updatedState()
     {
-        $this->emit('CovidStateUpdate', $this->state);
+        $this->dispatch('CovidStateUpdate', $this->state);
     }
 
     private function initVariable(HealthCareService $service): void

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\PandemicState;
+namespace App\Livewire\PandemicState;
 
 use App\Http\Services\Covid\CasesStateService;
 use App\Http\Services\Covid\VaxStateService;

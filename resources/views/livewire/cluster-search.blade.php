@@ -4,13 +4,13 @@
             <label class="text-left w-full">
                 <span>{{ __('Search any input') }}</span>
                 <input type="text" class="mx-12 px-8 py-2 border rounded-xl border-blue-300 "
-                    wire:model.debounce.500ms="search" placeholder="{{ __('Search by any keyword') }}">
+                    wire:model.live.debounce.500ms="search" placeholder="{{ __('Search by any keyword') }}">
             </label>
         </div>
         <div class="pb-2">
             <label class="text-left w-full">
                 <span>{{ __('Filter By Cluster Category') }}</span>
-                <select wire:model="categoryFilter" class="mx-8 px-12 py-2 border rounded-xl border-blue-300">
+                <select wire:model.live="categoryFilter" class="mx-8 px-12 py-2 border rounded-xl border-blue-300">
                     <option value="" selected>{{ __('All') }}</option>
                     <option value="" disabled>--------</option>
                     @foreach (\App\Models\Cluster::CLUSTER_CATEGORY as $key => $category)
@@ -22,7 +22,7 @@
         <div class="pb-2">
             <label class="text-left w-full">
                 <span>{{ __('Filter By State') }}</span>
-                <select wire:model="state" class="mx-8 px-12 py-2 border rounded-xl border-blue-300">
+                <select wire:model.live="state" class="mx-8 px-12 py-2 border rounded-xl border-blue-300">
                     <option value="" selected>{{ __('All') }}</option>
                     <option value="" disabled>--------</option>
                     @foreach (\App\Models\Cluster::STATE as $key => $state)
