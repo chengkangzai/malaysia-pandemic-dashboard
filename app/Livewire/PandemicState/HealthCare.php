@@ -6,8 +6,6 @@ use App\Http\Services\Covid\HealthCareService;
 use App\Models\Hospital;
 use App\Models\ICU;
 use App\Models\PKRC;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
@@ -30,7 +28,7 @@ class HealthCare extends Component
         return view('livewire.pandemic-state.health-care');
     }
 
-    public function placeholder():View
+    public function placeholder(): View
     {
         return view('livewire.pandemic-state.health-care-placeholder');
     }

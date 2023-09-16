@@ -10,8 +10,6 @@ use App\Models\Population;
 use App\Models\TestState;
 use App\Models\VaxRegState;
 use App\Models\VaxState;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
@@ -50,7 +48,7 @@ class Dashboard extends Component
         return view('livewire.pandemic-state.dashboard');
     }
 
-    public function placeholder():View
+    public function placeholder(): View
     {
         return view('livewire.pandemic-state.dashboard-placeholder');
     }
