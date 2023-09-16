@@ -1,7 +1,7 @@
 <div>
-    <h2 class="text-2xl pb-2">{{ __('Case Distribution') }}</h2>
+    <h2 class="pb-2 text-2xl">{{ __('Case Distribution') }}</h2>
     <hr class="py-2">
-    <div class="sm:w-1/2 mx-auto w-2/3">
+    <div class="mx-auto w-2/3 sm:w-1/2">
         <canvas id="active-case-percentage"></canvas>
     </div>
 </div>

@@ -4,11 +4,8 @@ namespace App\Livewire\PandemicDashboard;
 
 use App\Http\Services\Covid\VaxStateService;
 use App\Models\Population;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
-use JetBrains\PhpStorm\NoReturn;
 use Livewire\Component;
 
 class VaxState extends Component
@@ -42,8 +39,7 @@ class VaxState extends Component
         $this->vaxRegPrecent = collect($array);
     }
 
-    #[NoReturn]
-    public function render(VaxStateService $service): Factory|View|Application
+    public function render(VaxStateService $service): View
     {
         if ($this->readyToLoad) {
             $this->initVariable($service);

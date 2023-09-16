@@ -58,22 +58,22 @@ class Graph extends Component
 
     public function notifyChild()
     {
-        $this->dispatchBrowserEvent('CovidMalaysiaUpdate', [
-            'date' => $this->date,
-            'confirmCase' => $this->confirmCase,
-            'recoveredCase' => $this->recoveredCase,
-            'deathCase' => $this->deathCase,
-            'bidCase' => $this->bidCase,
-            'dodCase' => $this->dodCase,
-            'activeCase' => $this->activeCase,
-            'cat1' => $this->cat1,
-            'cat2' => $this->cat2,
-            'cat3' => $this->cat3,
-            'cat4' => $this->cat4,
-            'cat5' => $this->cat5,
-            'cumRecoveredCase' => $this->cumRecoveredCase,
-            'cumDeathCase' => $this->cumDeathCase,
-        ]);
+        $this->dispatch('CovidMalaysiaUpdate',
+            date: $this->date,
+            confirmCase: $this->confirmCase,
+            recoveredCase: $this->recoveredCase,
+            deathCase: $this->deathCase,
+            bidCase: $this->bidCase,
+            dodCase: $this->dodCase,
+            activeCase: $this->activeCase,
+            cat1: $this->cat1,
+            cat2: $this->cat2,
+            cat3: $this->cat3,
+            cat4: $this->cat4,
+            cat5: $this->cat5,
+            cumRecoveredCase: $this->cumRecoveredCase,
+            cumDeathCase: $this->cumDeathCase,
+        );
     }
 
     public function initHealthCareVariable(Collection $healthCareCategory): void

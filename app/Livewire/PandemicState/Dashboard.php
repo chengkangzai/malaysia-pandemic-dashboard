@@ -43,29 +43,16 @@ class Dashboard extends Component
 
     protected $listeners = ['CovidStateUpdate', 'vaxPopulationUpdate'];
 
-    public bool $readyToLoad = false;
-
-    public function mount()
-    {
-        $this->test = new TestState();
-        $this->cases = new CasesState();
-        $this->death = new DeathsState();
-        $this->vax = new VaxState();
-        $this->vaxReg = new VaxRegState();
-    }
-
     public function render(CasesStateService $casesStateService, VaxStateService $vaxStateService): Factory|View|Application
     {
-        if ($this->readyToLoad) {
             $this->initVariable($casesStateService, $vaxStateService);
-        }
 
         return view('livewire.pandemic-state.dashboard');
     }
 
-    public function load()
+    public function placeholder()
     {
-        $this->readyToLoad = true;
+
     }
 
     public function CovidStateUpdate(string $state)

@@ -9,7 +9,6 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/manifest.json">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     {!! SEO::generate(true) !!}
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -28,25 +27,24 @@
         html {
             scroll-behavior: smooth;
         }
-
     </style>
     @vite('resources/css/app.css')
     @stack('cdn')
     @stack('style')
-    @laravelPWA
-    @livewireStyles
+    {{--    @laravelPWA --}}
+    {{--    @livewireStyles --}}
     <script defer type='text/javascript'
         src='https://platform-api.sharethis.com/js/sharethis.js#property=61457a1f13073f0019a43554&product=sticky-share-buttons'
         async='async'></script>
 </head>
 
-<body class="bg-white dark:bg-black overscroll-none">
+<body class="overscroll-none bg-white dark:bg-black">
 
     <div class="sharethis-sticky-share-buttons"></div>
 
-    <header class="text-gray-600 body-font bg-gray-100 dark:bg-gray-900 fixed top-0 z-50 w-full">
-        <div x-data="{ open: false }" class="container mx-auto flex flex-wrap py-2 flex-col md:flex-row items-center">
-            <div class="flex title-font font-medium items-center text-gray-900 md:mb-0">
+    <header class="body-font fixed top-0 z-50 w-full bg-gray-100 text-gray-600 dark:bg-gray-900">
+        <div x-data="{ open: false }" class="container mx-auto flex flex-col flex-wrap items-center py-2 md:flex-row">
+            <div class="title-font flex items-center font-medium text-gray-900 md:mb-0">
                 <a href="https://www.chengkangzai.com">
                     <img src="{{ asset('favicon.ico') }}" alt="Go to Profile Page" class="w-8" loading="lazy"
                         width="32" height="32" />
@@ -55,8 +53,8 @@
                     <span class="ml-3 text-xl dark:text-white">{{ __('COVID Dashboard') }}</span>
                 </a>
                 <button @click="open = !open" aria-label="Toggle Drop Down"
-                    class="md:hidden rounded-lg focus:outline-none focus:shadow-outline absolute right-2 text-black dark:text-white">
-                    <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6 text-black dark:text-white">
+                    class="focus:shadow-outline absolute right-2 rounded-lg text-black focus:outline-none dark:text-white md:hidden">
+                    <svg fill="currentColor" viewBox="0 0 20 20" class="h-6 w-6 text-black dark:text-white">
                         <path x-show="!open" fill-rule="evenodd" clip-rule="evenodd" class="fill-current"
                             d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z">
                         </path>
@@ -66,35 +64,35 @@
                     </svg>
                 </button>
             </div>
-            <nav :class="{'flex': open, 'hidden': !open}"
-                class="flex-col flex-grow pb-4 md:pb-0 hidden md:flex md:justify-end md:flex-row dark:text-white">
+            <nav :class="{ 'flex': open, 'hidden': !open }"
+                class="hidden flex-grow flex-col pb-4 dark:text-white md:flex md:flex-row md:justify-end md:pb-0">
                 <a href="{{ route('pandemic.index') }}"
-                    class="cursor-pointer dark:hover:text-white hover:text-gray-900 dark:hover:bg-gray-600 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline rounded-lg px-2 py-2 text-bold @if (request()->is('pandemic')) ) bg-gray-50 dark:bg-gray-800 font-bold @endif">
+                    class="focus:shadow-outline text-bold @if (request()->is('pandemic')) ) bg-gray-50 dark:bg-gray-800 font-bold @endif cursor-pointer rounded-lg px-2 py-2 hover:bg-gray-200 hover:text-gray-900 focus:bg-gray-200 focus:text-gray-900 focus:outline-none dark:hover:bg-gray-600 dark:hover:text-white">
                     {{ __('Dashboard') }}
                 </a>
                 <a href="{{ route('pandemic.state') }}"
-                    class="cursor-pointer dark:hover:text-white hover:text-gray-900 dark:hover:bg-gray-600 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline rounded-lg px-2 py-2 text-bold @if (request()->is('pandemic/state')) ) bg-gray-50 dark:bg-gray-800 font-bold @endif ">
+                    class="focus:shadow-outline text-bold @if (request()->is('pandemic/state')) ) bg-gray-50 dark:bg-gray-800 font-bold @endif cursor-pointer rounded-lg px-2 py-2 hover:bg-gray-200 hover:text-gray-900 focus:bg-gray-200 focus:text-gray-900 focus:outline-none dark:hover:bg-gray-600 dark:hover:text-white">
                     {{ __('State View') }}
                 </a>
                 <a href="{{ route('pandemic.clusters') }}"
-                    class="cursor-pointer dark:hover:text-white hover:text-gray-900 dark:hover:bg-gray-600 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline rounded-lg px-2 py-2 text-bold @if (request()->is('pandemic/clusters')) ) bg-gray-50 dark:bg-gray-800 font-bold @endif">
+                    class="focus:shadow-outline text-bold @if (request()->is('pandemic/clusters')) ) bg-gray-50 dark:bg-gray-800 font-bold @endif cursor-pointer rounded-lg px-2 py-2 hover:bg-gray-200 hover:text-gray-900 focus:bg-gray-200 focus:text-gray-900 focus:outline-none dark:hover:bg-gray-600 dark:hover:text-white">
                     {{ __('Clusters') }}
                 </a>
                 <a href="{{ route('pandemic.vaccination') }}"
-                    class="cursor-pointer dark:hover:text-white hover:text-gray-900 dark:hover:bg-gray-600 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline rounded-lg px-2 py-2 text-bold @if (request()->is('pandemic/vaccination')) ) bg-gray-50 dark:bg-gray-800 font-bold @endif">
+                    class="focus:shadow-outline text-bold @if (request()->is('pandemic/vaccination')) ) bg-gray-50 dark:bg-gray-800 font-bold @endif cursor-pointer rounded-lg px-2 py-2 hover:bg-gray-200 hover:text-gray-900 focus:bg-gray-200 focus:text-gray-900 focus:outline-none dark:hover:bg-gray-600 dark:hover:text-white">
                     {{ __('Vaccination') }}
                 </a>
                 <div @click.away="open = false" class="relative" x-data="{ open: false }">
                     <button @click="open = !open" aria-label="Drop Down trigger"
-                        class="hover:text-black flex flex-row dark:text-white text-black items-center w-full px-2 py-2 mt-2 text-bold text-md text-left bg-transparent rounded-lg dark:bg-transparent dark:focus:text-white dark:hover:text-white dark:focus:bg-gray-600 dark:hover:bg-gray-600 md:w-auto md:inline md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
+                        class="text-bold text-md focus:shadow-outline mt-2 flex w-full flex-row items-center rounded-lg bg-transparent px-2 py-2 text-left text-black hover:bg-gray-200 hover:text-black hover:text-gray-900 focus:bg-gray-200 focus:text-gray-900 focus:outline-none dark:bg-transparent dark:text-white dark:hover:bg-gray-600 dark:hover:text-white dark:focus:bg-gray-600 dark:focus:text-white md:mt-0 md:ml-4 md:inline md:w-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="inline h-6 w-6" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                         <span>{{ __('Select Language') }}</span>
-                        <svg viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}"
-                            class="inline w-4 h-4 mt-1 ml-1 text-black dark:text-white fill-current transition-transform duration-200 transform md:-mt-1">
+                        <svg viewBox="0 0 20 20" :class="{ 'rotate-180': open, 'rotate-0': !open }"
+                            class="mt-1 ml-1 inline h-4 w-4 transform fill-current text-black transition-transform duration-200 dark:text-white md:-mt-1">
                             <path fill-rule="evenodd" clip-rule="evenodd"
                                 d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z">
                             </path>
@@ -106,13 +104,13 @@
                         x-transition:leave="transition ease-in duration-75"
                         x-transition:leave-start="transform opacity-100 scale-100"
                         x-transition:leave-end="transform opacity-0 scale-95"
-                        class="absolute right-0 w-full mt-2 origin-top-right rounded-md shadow-lg md:w-48">
-                        <div class="px-2 py-2 bg-white rounded-md shadow dark:bg-gray-800">
-                            <a class="@if (app()->getLocale() == 'en') bg-gray-200 dark:bg-gray-600 @endif block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark:bg-transparent dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                        class="absolute right-0 mt-2 w-full origin-top-right rounded-md shadow-lg md:w-48">
+                        <div class="rounded-md bg-white px-2 py-2 shadow dark:bg-gray-800">
+                            <a class="@if (app()->getLocale() == 'en') bg-gray-200 dark:bg-gray-600 @endif focus:shadow-outline mt-2 block rounded-lg bg-transparent px-4 py-2 text-sm font-semibold hover:bg-gray-200 hover:text-gray-900 focus:bg-gray-200 focus:text-gray-900 focus:outline-none dark:bg-transparent dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:bg-gray-600 dark:focus:text-white md:mt-0"
                                 href="{{ route('setLocale', 'en') }}">English</a>
-                            <a class="@if (app()->getLocale() == 'zh') bg-gray-200 dark:bg-gray-600 @endif block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark:bg-transparent dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                            <a class="@if (app()->getLocale() == 'zh') bg-gray-200 dark:bg-gray-600 @endif focus:shadow-outline mt-2 block rounded-lg bg-transparent px-4 py-2 text-sm font-semibold hover:bg-gray-200 hover:text-gray-900 focus:bg-gray-200 focus:text-gray-900 focus:outline-none dark:bg-transparent dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:bg-gray-600 dark:focus:text-white md:mt-0"
                                 href="{{ route('setLocale', 'zh') }}">简体中文</a>
-                            <a class="@if (app()->getLocale() == 'ms') bg-gray-200 dark:bg-gray-600 @endif block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark:bg-transparent dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                            <a class="@if (app()->getLocale() == 'ms') bg-gray-200 dark:bg-gray-600 @endif focus:shadow-outline mt-2 block rounded-lg bg-transparent px-4 py-2 text-sm font-semibold hover:bg-gray-200 hover:text-gray-900 focus:bg-gray-200 focus:text-gray-900 focus:outline-none dark:bg-transparent dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:bg-gray-600 dark:focus:text-white md:mt-0"
                                 href="{{ route('setLocale', 'ms') }}">Bahasa Malaysia</a>
                         </div>
                     </div>
@@ -121,14 +119,14 @@
             </nav>
         </div>
     </header>
-    <main class="container w-full mx-auto text-center bg-white dark:bg-black mt-16">
+    <main class="container mx-auto mt-16 w-full bg-white text-center dark:bg-black">
         @yield('content')
     </main>
 
     @yield('footer')
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     @stack('script')
-    @livewireScripts
+    {{--    @livewireScripts --}}
 </body>
 
 </html>
