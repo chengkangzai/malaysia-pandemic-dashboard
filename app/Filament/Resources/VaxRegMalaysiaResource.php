@@ -15,7 +15,7 @@ class VaxRegMalaysiaResource extends Resource
 {
     protected static ?string $model = VaxRegMalaysia::class;
 
-    protected static ?string $label='National';
+    protected static ?string $label = 'National';
 
     protected static ?string $navigationGroup = 'Vaccination Registration';
 

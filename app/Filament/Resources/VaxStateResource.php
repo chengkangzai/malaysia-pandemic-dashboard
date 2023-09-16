@@ -21,7 +21,9 @@ class VaxStateResource extends Resource
     protected static ?string $model = VaxState::class;
 
     protected static ?string $label = 'States Vaccinations';
+
     protected static ?string $navigationGroup = 'Vaccination';
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function infolist(Infolist $infolist): Infolist
@@ -259,18 +261,17 @@ class VaxStateResource extends Resource
                             ->numeric(),
                     ]),
 
-//                Section::make('Pending')
-//                    ->compact()
-//            ->collapsible()
-//            ->collapsed()
-//                    ->columns(4)
-//                    ->schema([
-//                        TextEntry::make('pending1')->numeric(),
-//                        TextEntry::make('pending2')->numeric(),
-//                        TextEntry::make('pending3')->numeric(),
-//                        TextEntry::make('pending4')->numeric(),
-//                    ]),
-
+                //                Section::make('Pending')
+                //                    ->compact()
+                //            ->collapsible()
+                //            ->collapsed()
+                //                    ->columns(4)
+                //                    ->schema([
+                //                        TextEntry::make('pending1')->numeric(),
+                //                        TextEntry::make('pending2')->numeric(),
+                //                        TextEntry::make('pending3')->numeric(),
+                //                        TextEntry::make('pending4')->numeric(),
+                //                    ]),
 
             ]);
     }
@@ -504,12 +505,12 @@ class VaxStateResource extends Resource
                         DatePicker::make('from'),
                         DatePicker::make('until'),
                     ])
-                    ->query(fn(Builder $query, array $data): Builder => $query
+                    ->query(fn (Builder $query, array $data): Builder => $query
                         ->when($data['from'],
-                            fn(Builder $query, $date): Builder => $query->whereDate('date', '>=', $date),
+                            fn (Builder $query, $date): Builder => $query->whereDate('date', '>=', $date),
                         )
                         ->when($data['until'],
-                            fn(Builder $query, $date): Builder => $query->whereDate('date', '<=', $date),
+                            fn (Builder $query, $date): Builder => $query->whereDate('date', '<=', $date),
                         )),
 
                 Tables\Filters\SelectFilter::make('state')
@@ -526,9 +527,9 @@ class VaxStateResource extends Resource
                                 30 => '1 Month',
                             ]),
                     ])
-                    ->query(fn(Builder $query, array $data): Builder => $query
+                    ->query(fn (Builder $query, array $data): Builder => $query
                         ->when($data['range'],
-                            fn(Builder $query, $range): Builder => $query->whereDate('date', '>=', now()->subDays($range)),
+                            fn (Builder $query, $range): Builder => $query->whereDate('date', '>=', now()->subDays($range)),
                         )),
             ], Tables\Enums\FiltersLayout::AboveContentCollapsible)
             ->actions([

@@ -8,7 +8,6 @@ use App\Models\VaxMalaysia;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Form;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
@@ -22,7 +21,7 @@ class VaxMalaysiaResource extends Resource
 {
     protected static ?string $model = VaxMalaysia::class;
 
-    protected static ?string $label='National Vaccinations';
+    protected static ?string $label = 'National Vaccinations';
 
     protected static ?string $navigationGroup = 'Vaccination';
 
@@ -262,18 +261,17 @@ class VaxMalaysiaResource extends Resource
                             ->numeric(),
                     ]),
 
-//                Section::make('Pending')
-//                    ->compact()
-//            ->collapsible()
-//            ->collapsed()
-//                    ->columns(4)
-//                    ->schema([
-//                        TextEntry::make('pending1')->numeric(),
-//                        TextEntry::make('pending2')->numeric(),
-//                        TextEntry::make('pending3')->numeric(),
-//                        TextEntry::make('pending4')->numeric(),
-//                    ]),
-
+                //                Section::make('Pending')
+                //                    ->compact()
+                //            ->collapsible()
+                //            ->collapsed()
+                //                    ->columns(4)
+                //                    ->schema([
+                //                        TextEntry::make('pending1')->numeric(),
+                //                        TextEntry::make('pending2')->numeric(),
+                //                        TextEntry::make('pending3')->numeric(),
+                //                        TextEntry::make('pending4')->numeric(),
+                //                    ]),
 
             ]);
     }
