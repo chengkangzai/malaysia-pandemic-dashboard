@@ -82,6 +82,10 @@
                     class="focus:shadow-outline text-bold @if (request()->is('pandemic/vaccination')) ) bg-gray-50 dark:bg-gray-800 font-bold @endif cursor-pointer rounded-lg px-2 py-2 hover:bg-gray-200 hover:text-gray-900 focus:bg-gray-200 focus:text-gray-900 focus:outline-none dark:hover:bg-gray-600 dark:hover:text-white">
                     {{ __('Vaccination') }}
                 </a>
+                <a href="{{ filament()->getLoginUrl() }}"
+                   class="focus:shadow-outline text-bold cursor-pointer rounded-lg px-2 py-2 hover:bg-gray-200 hover:text-gray-900 focus:bg-gray-200 focus:text-gray-900 focus:outline-none dark:hover:bg-gray-600 dark:hover:text-white">
+                    {{ __('View Backend') }}
+                </a>
                 <div @click.away="open = false" class="relative" x-data="{ open: false }">
                     <button @click="open = !open" aria-label="Drop Down trigger"
                         class="text-bold text-md focus:shadow-outline mt-2 flex w-full flex-row items-center rounded-lg bg-transparent px-2 py-2 text-left text-black hover:bg-gray-200 hover:text-black hover:text-gray-900 focus:bg-gray-200 focus:text-gray-900 focus:outline-none dark:bg-transparent dark:text-white dark:hover:bg-gray-600 dark:hover:text-white dark:focus:bg-gray-600 dark:focus:text-white md:mt-0 md:ml-4 md:inline md:w-auto">
