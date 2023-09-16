@@ -9,8 +9,6 @@ use App\Models\Population;
 use App\Models\TestMalaysia;
 use App\Models\VaxMalaysia;
 use App\Models\VaxRegMalaysia;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
@@ -40,24 +38,16 @@ class Malaysia extends Component
 
     public mixed $popFilter = 'ABOVE_18';
 
-    public bool $readyToLoad = false;
-
-    public function mount()
+    public function render(CasesMalaysiaService $service): View
     {
-        $this->cases = new CasesMalaysia();
-        $this->death = new DeathsMalaysia();
-        $this->test = new TestMalaysia();
-        $this->vax = new VaxMalaysia();
-        $this->vaxReg = new VaxRegMalaysia();
-    }
-
-    public function render(CasesMalaysiaService $service): Factory|View|Application
-    {
-        if ($this->readyToLoad) {
-            $this->initVariable($service);
-        }
+        $this->initVariable($service);
 
         return view('livewire.pandemic-dashboard.malaysia');
+    }
+
+    public function placeholder(): View
+    {
+        return view('livewire.pandemic-dashboard.malaysia-place-holder');
     }
 
     public function load()
@@ -68,7 +58,7 @@ class Malaysia extends Component
     /**
      * Listen to vaxPopulation
      */
-    public function vaxPopulationUpdate(string $popFilter)
+    public function vaxPopulationUpdate(string $popFilter): void
     {
         $this->popFilter = $popFilter;
     }
