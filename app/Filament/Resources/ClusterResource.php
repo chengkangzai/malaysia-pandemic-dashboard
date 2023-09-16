@@ -30,17 +30,27 @@ class ClusterResource extends Resource
                 TextEntry::make('cluster')->label('Cluster Name'),
                 TextEntry::make('state')->badge()->separator(','),
                 TextEntry::make('district')->badge()->separator(','),
-                TextEntry::make('date_announced')->date(),
-                TextEntry::make('date_last_onset')->date(),
+                TextEntry::make('date_announced')
+                    ->label('Announced Date')
+                    ->date(),
+                TextEntry::make('date_last_onset')
+                    ->label('Last Onset Date')
+                    ->date(),
                 TextEntry::make('category'),
                 TextEntry::make('status'),
                 TextEntry::make('summary_bm')->columnSpanFull(),
                 TextEntry::make('summary_en')->columnSpanFull(),
                 Section::make('Cases')
                     ->schema([
-                        TextEntry::make('cases_new')->numeric(),
-                        TextEntry::make('cases_total')->numeric(),
-                        TextEntry::make('cases_active')->numeric(),
+                        TextEntry::make('cases_new')
+                            ->label('New Cases')
+                            ->numeric(),
+                        TextEntry::make('cases_total')
+                            ->label('Total Cases')
+                            ->numeric(),
+                        TextEntry::make('cases_active')
+                            ->label('Active Cases')
+                            ->numeric(),
                     ]),
                 Section::make('Others')
                     ->schema([
@@ -60,10 +70,12 @@ class ClusterResource extends Resource
                 Tables\Columns\TextColumn::make('cluster')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('date_announced')
+                    ->label('Announced Date')
                     ->icon('heroicon-o-speaker-wave')
                     ->date()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('date_last_onset')
+                    ->label('Last Onset Date')
                     ->icon('heroicon-o-eye')
                     ->date()
                     ->sortable(),
