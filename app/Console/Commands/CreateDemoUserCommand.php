@@ -18,6 +18,7 @@ class CreateDemoUserCommand extends Command
 
         if (User::firstWhere('email', $email)) {
             $this->error('User already exists');
+
             return;
         }
 
