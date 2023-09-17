@@ -5,7 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ClusterResource\Pages;
 use App\Models\Cluster;
 use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\Section;
+use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
@@ -19,8 +19,6 @@ class ClusterResource extends Resource
     protected static ?string $model = Cluster::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-circle-stack';
-
-    protected static ?string $navigationGroup = 'Covid-19 Cluster';
 
     public static function infolist(Infolist $infolist): Infolist
     {
@@ -41,6 +39,8 @@ class ClusterResource extends Resource
                 TextEntry::make('summary_bm')->columnSpanFull(),
                 TextEntry::make('summary_en')->columnSpanFull(),
                 Section::make('Cases')
+                    ->compact()
+                    ->columns(3)
                     ->schema([
                         TextEntry::make('cases_new')
                             ->label('New Cases')
@@ -53,6 +53,8 @@ class ClusterResource extends Resource
                             ->numeric(),
                     ]),
                 Section::make('Others')
+                    ->compact()
+                    ->columns(4)
                     ->schema([
                         TextEntry::make('tests')->numeric(),
                         TextEntry::make('icu')->numeric(),
