@@ -5,12 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use JetBrains\PhpStorm\Pure;
 
 class ICU extends Model
 {
-    use HasFactory;
-
     protected $table = 'icus';
 
     protected $casts = [
@@ -45,12 +42,11 @@ class ICU extends Model
         return $query->orderByDesc('date')->take(16)->orderBy('state');
     }
 
-    public function getTotalPatientAttribute()
+    public function getTotalPatientAttribute(): float|int
     {
         return $this->icu_covid + $this->icu_noncovid + $this->icu_pui;
     }
 
-    #[Pure]
     public function getOverallUtilisationAttribute(): float|int
     {
         return ($this->getTotalPatientAttribute() / $this->bed_icu_total ?? 1) * 100;
@@ -66,7 +62,6 @@ class ICU extends Model
         return $this->vent_covid + $this->vent_pui + $this->vent_noncovid;
     }
 
-    #[Pure]
     public function getVentilationUtilisationAttribute(): float|int
     {
         return ($this->getTotalVentilatorsPatientAttribute() / ($this->totalVentilators ?: 1)) * 100;
