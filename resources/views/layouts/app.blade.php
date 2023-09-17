@@ -31,8 +31,7 @@
     @vite('resources/css/app.css')
     @stack('cdn')
     @stack('style')
-    {{--    @laravelPWA --}}
-    {{--    @livewireStyles --}}
+    @laravelPWA
     <script defer type='text/javascript'
         src='https://platform-api.sharethis.com/js/sharethis.js#property=61457a1f13073f0019a43554&product=sticky-share-buttons'
         async='async'></script>
@@ -130,7 +129,6 @@
     @yield('footer')
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     @stack('script')
-    {{--    @livewireScripts --}}
 </body>
 
 </html>

@@ -9,6 +9,7 @@
         "artesaos/seotools": "^1.2",
         "barryvdh/laravel-translation-manager": "^0.6.5",
         "filament/filament": "^3.0.52",
+        "flowframe/laravel-trend": "^0.1.5",
         "guzzlehttp/guzzle": "^7.8",
         "hammerstone/sidecar": "^0.4.1",
         "laravel/framework": "^10.23.1",

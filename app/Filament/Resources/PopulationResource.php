@@ -14,8 +14,6 @@ class PopulationResource extends Resource
 {
     protected static ?string $model = Population::class;
 
-    protected static ?string $navigationGroup = 'Statistics';
-
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
     public static function infolist(Infolist $infolist): Infolist

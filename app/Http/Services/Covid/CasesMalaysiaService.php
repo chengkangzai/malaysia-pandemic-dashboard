@@ -42,7 +42,7 @@ class CasesMalaysiaService
             ->first();
     }
 
-    public function getCases()
+    public function getCases(): CasesMalaysia
     {
         return Cache::remember('CasesMalaysia.Cases', $this->cacheSecond, fn () => CasesMalaysia::latestOne()->get())
             ->map(function (CasesMalaysia $cases) {
