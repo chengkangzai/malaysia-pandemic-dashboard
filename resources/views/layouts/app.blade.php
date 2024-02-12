@@ -142,7 +142,7 @@
                 x: 30,
                 y: 44,
             },
-            stopOnFocus: true, // Prevents dismissing of toast on hover
+            close: true,
         }).showToast();
     </script>
     @stack('script')
