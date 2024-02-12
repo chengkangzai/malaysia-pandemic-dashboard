@@ -8,6 +8,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     {!! SEO::generate(true) !!}
 
@@ -128,6 +129,22 @@
 
     @yield('footer')
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script>
+        Toastify({
+            text: '{{__('This project stopped updating data in 2024-02-14, if you think this project is useful and want to continue this project, please contact me')}}',
+            duration: 5000,
+            gravity: "top",
+            style:{
+              "max-width": "420px",
+            },
+            offset: {
+                x: 30,
+                y: 44,
+            },
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+        }).showToast();
+    </script>
     @stack('script')
 </body>
 
