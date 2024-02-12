@@ -15,7 +15,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command(ImportPandemicDataCommand::class)->hourly();
+        // $schedule->command(ImportPandemicDataCommand::class)->hourly();
     }
 
     /**
