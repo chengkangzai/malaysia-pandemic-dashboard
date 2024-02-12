@@ -45,8 +45,8 @@ class ImportPandemicService
         'POPULATION' => self::MOHBaseUrl.'/static/population.csv',
         'VAX_MALAYSIA' => self::CITFBaseUrl.'/vaccination/vax_malaysia.csv',
         'VAX_STATE' => self::CITFBaseUrl.'/vaccination/vax_state.csv',
-        'VAX_REG_MALAYSIA' => self::CITFBaseUrl.'/registration/vaxreg_malaysia.csv',
-        'VAX_REG_STATE' => self::CITFBaseUrl.'/registration/vaxreg_state.csv',
+        'VAX_REG_MALAYSIA' => self::MOHBaseUrl.'/vaccination/vax_malaysia.csv',
+        'VAX_REG_STATE' => self::MOHBaseUrl.'/vaccination/vax_state.csv',
     ];
 
     private array $recordHolder;
@@ -62,7 +62,7 @@ class ImportPandemicService
             return collect(self::url)
                 ->map(function ($url, $key) use ($pool) {
                     $pool->as($key)
-                        ->timeout(30)
+                        ->timeout(200)
                         ->retry(5, 1000, fn ($ex, Response $res) => $ex instanceof ConnectException || $res->failed())
                         ->get($url);
                 })
