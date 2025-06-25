@@ -28,24 +28,24 @@ class VaxStateResource extends Resource
 
     public static function infolist(Infolist $infolist): Infolist
     {
-        //date: yyyy-mm-dd format; data correct as of 2359hrs on that date
-        //state: Name of state (present in state file, but not country file)
-        //daily_partial: 1st doses (for double-dose vaccines) delivered between 0000 and 2359 on date
-        //daily_full: 2nd doses (for single-dose vaccines) and 1-dose vaccines (e.g. Cansino) delivered between 0000 and 2359 on date.
-        //daily_booster Booster/third doses delivered between 0000 and 2359 on date.
-        //daily = daily_partial + daily_full + daily_booster
-        //cumul_partial = sum of daily_partial + cansino for all T <= date, i.e. number of people with at least 1 dose
-        //cumul_full = sum of daily_full for all T <= date, i.e. number of people who have completed their vaccination regimen
-        //cumul_booster sum of daily_booster for all T <= date, i.e. number of people who have received a booster
-        //cumul_partial_child = number of children (< 18yo) who have received their 1st dose (thus far, only Pfizer is used)
-        //cumul_full_child = number of children (< 18yo) who have received their 2nd dose (thus far, only Pfizer is used)
-        //cumul = cumul_partial + cumul_full + cumul_booster - cumulative cansino doses to date, i.e. total doses administerd
-        //x1and x2 = 1st and 2nd doses of double-dose vaccine type x delivered between 0000 and 2359 on date, where x can be pfizer, sinovac or astra
-        //x = doses of single-dose vaccine type x delivered between 0000 and 2359 on date, where x can be cansino
-        //pending = doses delivered that are 'quarantined' in the Vaccine Management System due to errors and/or inconsistencies in vaccine bar code, batch number, et cetera; these problems are usually resolved soon and affect ~0.1% of all records on a rolling basis. pending records for dates far in the past are not unresolved errors, but rather reflect backdated manual uploads.
-        //Methodological choices
-        //The variable cumul shows the number of unique doses which have been administered. However, people are also interested in tracking the number of unique individuals who have been vaccinated - this is captured by the variable cumul_partial, which compromises people who received 1 dose of a double-dose vaccine, and those who received a single-dose vaccine. cumul_full is a perfect subset of cumul_partial - individuals who received a single-dose vaccine are also included here. This is why cumul does not equal cumul_partial + cumul_full - the number of single-dose vaccines administered must be deducted.
-        //With substantial outreach efforts in areas with poor internet access, vaccinations (which are normally tracked in real time) have to be documented offline (think Excel sheets and paper forms). Given that outreach programs may last days at a time, records of these vaccinations may only be uploaded and consolidated a few days after the day on which they occured. Consequently, we may revise the dataset from time to time if more data is reported for dates already contained within the datasets. These revisions will typically cause vaccination counts to increase, though minor decreases may be observed if there are corrections to dosage dates after they are recorded and published under another day's data. Thus far, revsisions have been made on:
+        // date: yyyy-mm-dd format; data correct as of 2359hrs on that date
+        // state: Name of state (present in state file, but not country file)
+        // daily_partial: 1st doses (for double-dose vaccines) delivered between 0000 and 2359 on date
+        // daily_full: 2nd doses (for single-dose vaccines) and 1-dose vaccines (e.g. Cansino) delivered between 0000 and 2359 on date.
+        // daily_booster Booster/third doses delivered between 0000 and 2359 on date.
+        // daily = daily_partial + daily_full + daily_booster
+        // cumul_partial = sum of daily_partial + cansino for all T <= date, i.e. number of people with at least 1 dose
+        // cumul_full = sum of daily_full for all T <= date, i.e. number of people who have completed their vaccination regimen
+        // cumul_booster sum of daily_booster for all T <= date, i.e. number of people who have received a booster
+        // cumul_partial_child = number of children (< 18yo) who have received their 1st dose (thus far, only Pfizer is used)
+        // cumul_full_child = number of children (< 18yo) who have received their 2nd dose (thus far, only Pfizer is used)
+        // cumul = cumul_partial + cumul_full + cumul_booster - cumulative cansino doses to date, i.e. total doses administerd
+        // x1and x2 = 1st and 2nd doses of double-dose vaccine type x delivered between 0000 and 2359 on date, where x can be pfizer, sinovac or astra
+        // x = doses of single-dose vaccine type x delivered between 0000 and 2359 on date, where x can be cansino
+        // pending = doses delivered that are 'quarantined' in the Vaccine Management System due to errors and/or inconsistencies in vaccine bar code, batch number, et cetera; these problems are usually resolved soon and affect ~0.1% of all records on a rolling basis. pending records for dates far in the past are not unresolved errors, but rather reflect backdated manual uploads.
+        // Methodological choices
+        // The variable cumul shows the number of unique doses which have been administered. However, people are also interested in tracking the number of unique individuals who have been vaccinated - this is captured by the variable cumul_partial, which compromises people who received 1 dose of a double-dose vaccine, and those who received a single-dose vaccine. cumul_full is a perfect subset of cumul_partial - individuals who received a single-dose vaccine are also included here. This is why cumul does not equal cumul_partial + cumul_full - the number of single-dose vaccines administered must be deducted.
+        // With substantial outreach efforts in areas with poor internet access, vaccinations (which are normally tracked in real time) have to be documented offline (think Excel sheets and paper forms). Given that outreach programs may last days at a time, records of these vaccinations may only be uploaded and consolidated a few days after the day on which they occured. Consequently, we may revise the dataset from time to time if more data is reported for dates already contained within the datasets. These revisions will typically cause vaccination counts to increase, though minor decreases may be observed if there are corrections to dosage dates after they are recorded and published under another day's data. Thus far, revsisions have been made on:
         return $infolist
             ->schema([
                 TextEntry::make('date')->date(),

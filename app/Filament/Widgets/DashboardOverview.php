@@ -28,7 +28,7 @@ class DashboardOverview extends BaseWidget
         ];
     }
 
-    //REGION
+    // REGION
     public function covidCases()
     {
         $data = Trend::query(CasesMalaysia::query())
@@ -92,7 +92,7 @@ class DashboardOverview extends BaseWidget
             ->chart($data);
     }
 
-    //ENDREGION
+    // ENDREGION
     private function firstVax()
     {
         $data = Trend::query(VaxMalaysia::query())

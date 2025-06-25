@@ -24,16 +24,16 @@ class VaxRegStateResource extends Resource
     public static function form(Form $form): Form
     {
         //        date: yyyy-mm-dd format; data correct as of 2359hrs on that date
-        //state: Name of state (for the Malaysia file, state = Malaysia)
-        //total: Number of unique registrants, with de-duplication done based on ID
-        //phase2: Number of unique individuals eligible for Phase 2, i.e. individuals who are at least 1 of elderly, comorb, oku (note: not the sum of the 3)
-        //mysj: Number of individuals registered via MySejahtera
-        //call: Number of individuals registered via the call centre, who do not have an existing registration via MySejahtera
-        //web: Number of individuals registered via the website (including on-behalf-of registrations done during outreach) who do not have an existing registration via MySejahtera or the call centre
-        //children: Number of individuals below 18yo
-        //elderly: Number of individuals aged 60yo and above
-        //comorb: Number of individuals self-declaring at least 1 comorbidity
-        //oku: Number of individuals self-declaring as OKU
+        // state: Name of state (for the Malaysia file, state = Malaysia)
+        // total: Number of unique registrants, with de-duplication done based on ID
+        // phase2: Number of unique individuals eligible for Phase 2, i.e. individuals who are at least 1 of elderly, comorb, oku (note: not the sum of the 3)
+        // mysj: Number of individuals registered via MySejahtera
+        // call: Number of individuals registered via the call centre, who do not have an existing registration via MySejahtera
+        // web: Number of individuals registered via the website (including on-behalf-of registrations done during outreach) who do not have an existing registration via MySejahtera or the call centre
+        // children: Number of individuals below 18yo
+        // elderly: Number of individuals aged 60yo and above
+        // comorb: Number of individuals self-declaring at least 1 comorbidity
+        // oku: Number of individuals self-declaring as OKU
         return $form
             ->schema([
                 TextEntry::make('date')->date(),

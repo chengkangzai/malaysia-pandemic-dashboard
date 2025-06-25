@@ -17,7 +17,7 @@ class UpdatePandemicBrowserScreenshot extends Command
         $this->info('Taking screenshot...');
 
         try {
-            //TODO Change URL
+            // TODO Change URL
             BrowsershotLambda::url(route('pandemic.index'))
                 ->select('#pandemic-stat')
                 ->windowSize(1920, 1080)
