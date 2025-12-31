@@ -28,7 +28,6 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### Data Import
 - `php artisan import:pandemic-data` - Import pandemic data
 - `php artisan export:pandemic-seeder` - Export pandemic data as seeders
-- `php artisan update:pandemic-browser-screenshot` - Update pandemic screenshots
 
 ## Architecture Overview
 
@@ -43,9 +42,8 @@ This is a **Laravel 10** application serving as a Malaysia Pandemic Dashboard wi
 
 ### Key Packages
 - **filament/filament**: Admin panel framework
-- **livewire/livewire**: Frontend reactivity without JavaScript frameworks  
+- **livewire/livewire**: Frontend reactivity without JavaScript frameworks
 - **flowframe/laravel-trend**: Data trending and analytics
-- **spatie/browsershot**: PDF/screenshot generation
 - **artesaos/seotools**: SEO optimization
 - **silviolleite/laravelpwa**: Progressive Web App features
 
@@ -86,7 +84,7 @@ Admin interfaces for all pandemic data models with CRUD operations
 1. **Import**: Console commands import pandemic data from external sources
 2. **Admin**: Filament provides admin interface for data management  
 3. **Display**: Livewire components render real-time dashboard views
-4. **Export**: Screenshot generation and data export capabilities
+4. **Export**: Data export capabilities
 
 ### Key Features
 - Multi-language support with translation management
