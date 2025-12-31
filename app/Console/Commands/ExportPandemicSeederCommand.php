@@ -14,7 +14,7 @@ class ExportPandemicSeederCommand extends Command
     public function handle(): int
     {
         $this->info('Exporting Covid Database Seeder...');
-        //TODO : split it to multiple commands
+        // TODO : split it to multiple commands
         Artisan::call('iseed cases_malaysia,cases_states,clusters,deaths_malaysia,deaths_states,hospitals,icus,PKRC,populations,test_malaysia,test_states --classnameprefix=Covid --chunksize=500 --exclude=id');
         $this->info('Exporting Vax Database Seeder...');
         Artisan::call('iseed vax_malaysias,vax_reg_malaysias,vax_reg_states,vax_states --classnameprefix=Vax --chunksize=500 --exclude=id');
@@ -24,10 +24,10 @@ class ExportPandemicSeederCommand extends Command
         $files = scandir(database_path('seeders'));
         foreach ($files as $file) {
             $filename = basename($file);
-            //get the file extension
+            // get the file extension
             $extension = pathinfo($file, PATHINFO_EXTENSION);
 
-            //check if classname prefix is Covid and extension is php
+            // check if classname prefix is Covid and extension is php
             if (str_contains($filename, 'Covid') && $extension == 'php') {
                 $this->info('Found Covid Seeder File: '.$filename);
                 $content = file_get_contents(database_path('seeders').'/'.$filename);

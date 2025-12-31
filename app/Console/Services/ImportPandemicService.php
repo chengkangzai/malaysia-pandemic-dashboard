@@ -190,7 +190,7 @@ class ImportPandemicService
         $data = $content
             ->map(function ($record) {
                 $item = explode(',', $record);
-                $case = new CasesState();
+                $case = new CasesState;
                 $i = 0;
                 $case->date = self::takeIndex($item, $i++);
                 $case->state = str(self::takeIndex($item, $i++))->replace('WP', 'W.P.');
@@ -252,7 +252,7 @@ class ImportPandemicService
                 $item = explode(',', $record);
                 $i = 0;
 
-                $collect = new DeathsState();
+                $collect = new DeathsState;
                 $collect->date = self::takeIndex($item, $i++);
                 $collect->state = str(self::takeIndex($item, $i++))->replace('WP', 'W.P.');
                 $collect->deaths_new = self::takeIndex($item, $i++);

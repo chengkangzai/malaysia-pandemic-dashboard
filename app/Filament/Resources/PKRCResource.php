@@ -26,12 +26,12 @@ class PKRCResource extends Resource
 
     public static function infolist(Infolist $infolist): Infolist
     {
-        //date: yyyy-mm-dd format; data correct as of 2359hrs on that date
-        //state: name of state; note that (unlike with other datasets), it is not necessary that there be an observation for every state on every date. for instance, there are no PKRCs in W.P. Kuala Lumpur and W.P Putrajaya.
-        //beds: total PKRC beds (with related medical infrastructure)
-        //admitted_x: number of individuals in category x admitted to PKRCs, where x can be suspected/probable, COVID-19 positive, or non-COVID
-        //discharged_x: number of individuals in category x discharged from PKRCs
-        //pkrc_x: total number of individuals in category x in PKRCs; this is a stock variable altered by flows from admissions and discharges
+        // date: yyyy-mm-dd format; data correct as of 2359hrs on that date
+        // state: name of state; note that (unlike with other datasets), it is not necessary that there be an observation for every state on every date. for instance, there are no PKRCs in W.P. Kuala Lumpur and W.P Putrajaya.
+        // beds: total PKRC beds (with related medical infrastructure)
+        // admitted_x: number of individuals in category x admitted to PKRCs, where x can be suspected/probable, COVID-19 positive, or non-COVID
+        // discharged_x: number of individuals in category x discharged from PKRCs
+        // pkrc_x: total number of individuals in category x in PKRCs; this is a stock variable altered by flows from admissions and discharges
         return $infolist
             ->schema([
                 TextEntry::make('date')->badge()->date(),

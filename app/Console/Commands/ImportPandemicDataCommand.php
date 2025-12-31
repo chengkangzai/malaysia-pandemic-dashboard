@@ -73,7 +73,7 @@ class ImportPandemicDataCommand extends Command
             }
 
             $this->info('Getting data from Github...');
-            $service = new ImportPandemicService();
+            $service = new ImportPandemicService;
             $shouldUpdate = false;
 
             foreach ($this->models as $model) {
